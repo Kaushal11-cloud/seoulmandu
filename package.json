@@ -1,0 +1,15 @@
+{
+  "name": "seoulmandu-website",
+  "version": "1.0.0",
+  "description": "Seoulmandu - A contemporary Korean food brand in Dharan, Nepal",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "npx serve ."
+  },
+  "devDependencies": {
+    "vite": "^5.4.2"
+  }
+}
