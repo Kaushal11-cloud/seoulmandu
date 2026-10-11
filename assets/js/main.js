@@ -16,6 +16,8 @@ const SELLER_WHATSAPP_CONFIG = {
   phoneNumber: "9779867066528", // <-- REPLACE WITH YOUR SELLER'S WHATSAPP NUMBER
   shopName: "Seoulmandu Korean Mart (서울만두)",
   location: "Dharan, Nepal",
+  coordinates: "26°48'44.1\"N 87°16'42.4\"E",
+  mapsUrl: "https://www.google.com/maps?q=26%C2%B048'44.1%22N+87%C2%B016'42.4%22E",
   currency: "Rs.",
   deliveryCharge: 100, // Delivery charge for Dharan town delivery
   confirmPrompt: "Please confirm item availability and estimated delivery/pickup time. Thank you!"
