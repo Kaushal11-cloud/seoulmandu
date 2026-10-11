@@ -162,6 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- 6. Render Menu Cards & Filtering ---
+  function getSafeImageUrl(url) {
+    if (!url) return 'assets/images/seoulmandu_logo.jpg';
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) return url;
+    return url.replace(/^\.?\//, '');
+  }
+
   function renderMenu() {
     if (!menuGrid || !window.SEOULMANDU_MENU) return;
 
@@ -209,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return `
         <article class="food-card" data-id="${dish.id}">
           <div class="food-card-img-wrap">
-            <img src="${dish.image}" alt="${dish.name}" loading="lazy">
+            <img src="${getSafeImageUrl(dish.image)}" alt="${dish.name}" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='assets/images/seoulmandu_logo.jpg';">
             <div class="food-card-floating-badge">
               <span class="badge-pill ${dish.badge.includes('BEST') ? 'red' : 'gold'}">${dish.badge}</span>
             </div>
@@ -359,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Render cart items with individual price, quantity stepper, and remove button
       cartItemsList.innerHTML = state.cart.map(item => `
         <div class="cart-item" data-id="${item.id}">
-          <img class="cart-item-img" src="${item.image}" alt="${item.name}" loading="lazy">
+          <img class="cart-item-img" src="${getSafeImageUrl(item.image)}" alt="${item.name}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/seoulmandu_logo.jpg';">
           <div class="cart-item-info">
             <h5>${item.name}</h5>
             <div class="cart-item-price-calc">
@@ -691,7 +697,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     foodModalContent.innerHTML = `
       <div class="food-modal-img-wrap">
-        <img src="${dish.image}" alt="${dish.name}">
+        <img src="${getSafeImageUrl(dish.image)}" alt="${dish.name}" onerror="this.onerror=null; this.src='assets/images/seoulmandu_logo.jpg';">
         <div style="position: absolute; top: 18px; left: 18px;">
           <span class="badge-pill red">${dish.badge}</span>
         </div>
