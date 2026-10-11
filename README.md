@@ -120,4 +120,6 @@ All customizable details are clearly marked:
 - `Dharan, Nepal` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
 - `10:00 AM - 9:30 PM` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
 - `+977 9825388189` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
+- `https://www.tiktok.com/@seoulmandu` — in [index.html](file:///d:/downloads/Seoulmandu/index.html) and [products.json](file:///d:/downloads/Seoulmandu/products.json)
+- `https://www.instagram.com/seoulmandu.store` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
 - Menu / mart items, prices (`Rs. [420]`), and descriptions — in [assets/js/menu-data.js](file:///d:/downloads/Seoulmandu/assets/js/menu-data.js) and [products.json](file:///d:/downloads/Seoulmandu/products.json)

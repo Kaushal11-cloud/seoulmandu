@@ -2112,6 +2112,29 @@ ul, ol {
   box-shadow: 0 6px 20px rgba(253, 29, 29, 0.35);
 }
 
+.tiktok-handle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.tiktok-handle-badge:hover {
+  background: #000000;
+  border-color: #25F4EE;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: -2px -2px 14px rgba(37, 244, 238, 0.45), 2px 2px 14px rgba(254, 44, 85, 0.45);
+}
+
 .ig-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -2710,6 +2733,27 @@ ul, ol {
   border-color: var(--color-primary);
   color: var(--color-primary-text);
   transform: translateY(-2px);
+}
+
+.social-circle-btn[aria-label*="Instagram"]:hover {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  border-color: transparent;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(253, 29, 29, 0.4);
+}
+
+.social-circle-btn[aria-label*="TikTok"]:hover {
+  background: #000000;
+  border-color: #25F4EE;
+  color: #25F4EE;
+  box-shadow: -2px -2px 12px rgba(37, 244, 238, 0.45), 2px 2px 12px rgba(254, 44, 85, 0.45);
+}
+
+.social-circle-btn[aria-label*="Facebook"]:hover {
+  background: #1877F2;
+  border-color: #1877F2;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.4);
 }
 
 .footer-col-title {
