@@ -8,12 +8,12 @@
 // Replace phoneNumber with your shop's actual WhatsApp phone number.
 // Format: Country Code + Mobile Number (NO plus sign '+', NO dashes, NO spaces).
 // Examples:
-//   - Nepal:     "9779867066528" (where 977 is country code)
+//   - Nepal:     "9779825388189" (where 977 is country code)
 //   - India:     "919876543210"  (where 91 is country code)
 //   - US/Canada: "15551234567"   (where 1 is country code)
 // =============================================================================
 const SELLER_WHATSAPP_CONFIG = {
-  phoneNumber: "9779867066528", // <-- REPLACE WITH YOUR SELLER'S WHATSAPP NUMBER
+  phoneNumber: "9779825388189", // <-- REPLACE WITH YOUR SELLER'S WHATSAPP NUMBER
   shopName: "Seoulmandu Korean Mart (서울만두)",
   location: "Dharan, Nepal",
   coordinates: "26°48'44.1\"N 87°16'42.4\"E",

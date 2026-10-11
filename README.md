@@ -116,8 +116,8 @@ The project is built with clean vanilla HTML5, CSS3, and modern JavaScript. You 
 
 ### Replacing Business Placeholders & WhatsApp Configuration
 All customizable details are clearly marked:
-- **WhatsApp Ordering Number**: Configured in [assets/js/main.js](file:///d:/downloads/Seoulmandu/assets/js/main.js#L14-L21) under `SELLER_WHATSAPP_CONFIG.phoneNumber` (`"9779867066528"`).
+- **WhatsApp Ordering Number**: Configured in [assets/js/main.js](file:///d:/downloads/Seoulmandu/assets/js/main.js#L14-L21) under `SELLER_WHATSAPP_CONFIG.phoneNumber` (`"9779825388189"`).
 - `Dharan, Nepal` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
 - `10:00 AM - 9:30 PM` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
-- `+977 9867066528` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
+- `+977 9825388189` — in [index.html](file:///d:/downloads/Seoulmandu/index.html)
 - Menu / mart items, prices (`Rs. [420]`), and descriptions — in [assets/js/menu-data.js](file:///d:/downloads/Seoulmandu/assets/js/menu-data.js) and [products.json](file:///d:/downloads/Seoulmandu/products.json)
