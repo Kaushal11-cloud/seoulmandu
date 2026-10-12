@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 4. Mobile Navigation Drawer ---
   function toggleMobileMenu(isOpen) {
     if (isOpen) {
+      if (mobileNavDrawer) mobileNavDrawer.scrollTop = 0;
       mobileNavDrawer.classList.add('open');
       mobileOverlay.classList.add('active');
       mobileMenuBtn.classList.add('active');
