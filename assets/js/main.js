@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="food-card-price">${dish.price}</span>
             </div>
             <div class="food-card-subname">${dish.subname}</div>
-            <p class="food-card-desc">${dish.description}</p>
             <div class="food-card-tags">
               ${dish.tags.map(t => `<span class="food-tag-pill">${t}</span>`).join('')}
               ${dish.isVegetarian ? `<span class="food-tag-pill" style="color: var(--color-accent-sage);">🌱 Vegetarian</span>` : ''}
