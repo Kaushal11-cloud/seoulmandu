@@ -12,6 +12,8 @@ export default defineConfig({
         main: resolve(process.cwd(), 'index.html'),
         privacy: resolve(process.cwd(), 'privacy-policy.html'),
         privacypolicy: resolve(process.cwd(), 'privacypolicy.html'),
+        terms: resolve(process.cwd(), 'terms-of-service.html'),
+        termsofservice: resolve(process.cwd(), 'termsofservice.html'),
       },
     },
   },
