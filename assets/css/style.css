@@ -1906,7 +1906,7 @@ ul, ol {
   line-height: 1;
   text-transform: uppercase;
   color: #FFFFFF;
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 
 .split-city-desc {
