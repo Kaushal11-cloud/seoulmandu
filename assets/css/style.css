@@ -1861,6 +1861,14 @@ ul, ol {
   overflow: hidden;
 }
 
+.split-card.seoul {
+  grid-column: 1;
+}
+
+.split-card.ktm {
+  grid-column: 2;
+}
+
 .split-card-bg {
   position: absolute;
   inset: 0;
@@ -1941,6 +1949,7 @@ ul, ol {
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  pointer-events: none;
 }
 
 .bridge-circle {
@@ -1956,13 +1965,21 @@ ul, ol {
   box-shadow: 0 0 30px rgba(229, 169, 82, 0.4);
 }
 
-.bridge-circle svg {
-  animation: pulseRotate 4s ease-in-out infinite;
+.bridge-circle svg,
+.bridge-arrow-icon {
+  display: block;
+  transform-origin: center;
+  transform: rotate(0deg);
+  animation: pulseArrowDesktop 4s ease-in-out infinite;
 }
 
-@keyframes pulseRotate {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+@keyframes pulseArrowDesktop {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(0deg) scale(1.15);
+  }
 }
 
 .bridge-banner {
@@ -1976,6 +1993,17 @@ ul, ol {
   border-radius: var(--radius-full);
   white-space: nowrap;
   box-shadow: var(--shadow-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bridge-arrow-desktop {
+  display: inline;
+}
+
+.bridge-arrow-mobile {
+  display: none;
 }
 
 .story-bridge-footer {
@@ -3602,12 +3630,47 @@ ul, ol {
   .split-story-container {
     grid-template-columns: 1fr;
   }
+  .split-card.seoul {
+    grid-column: 1;
+    min-height: 380px;
+  }
+  .split-card.ktm {
+    grid-column: 1;
+    min-height: 380px;
+  }
   .split-center-bridge {
     position: relative;
     top: auto;
     left: auto;
     transform: none;
-    margin: -30px auto;
+    margin: -36px auto;
+    z-index: 10;
+  }
+  .bridge-circle {
+    width: 76px;
+    height: 76px;
+    box-shadow: 0 0 24px rgba(229, 169, 82, 0.45);
+  }
+  .bridge-circle svg,
+  .bridge-arrow-icon {
+    width: 28px;
+    height: 28px;
+    transform: rotate(90deg);
+    animation: pulseArrowMobile 4s ease-in-out infinite;
+  }
+  @keyframes pulseArrowMobile {
+    0%, 100% {
+      transform: rotate(90deg) scale(1);
+    }
+    50% {
+      transform: rotate(90deg) scale(1.15);
+    }
+  }
+  .bridge-arrow-desktop {
+    display: none;
+  }
+  .bridge-arrow-mobile {
+    display: inline;
   }
   .location-grid {
     grid-template-columns: 1fr;
@@ -3660,6 +3723,10 @@ ul, ol {
   }
   .cta-inner-card {
     padding: 50px 24px;
+  }
+  .split-card {
+    min-height: 280px;
+    padding: 28px 20px;
   }
 }
 
