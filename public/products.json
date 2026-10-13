@@ -11,7 +11,7 @@
   "website": "https://kaushal11-cloud.github.io/seoulmandu/",
   "currency": "NPR",
   "currencySymbol": "Rs.",
-  "totalProducts": 13,
+  "totalProducts": 14,
   "lastUpdated": "2026-10-11",
   "categories": [
     {
@@ -282,6 +282,25 @@
       "inStock": true,
       "image": "assets/images/seoul_to_dharan_aisle.jpg",
       "tags": ["Chilled Cans", "Milkis", "Real Fruit Pulp", "Imported Soda"]
+    },
+    {
+      "id": "sm-13",
+      "name": "Lotte Pepero Assorted Collection",
+      "koreanName": "롯데 빼빼로 컬렉션",
+      "subname": "Original, Almond, Choco Cookie & White Cookie Sticks",
+      "category": "Drinks & Sweets",
+      "categoryId": "drinks_sweets",
+      "price": 220,
+      "priceFormatted": "Rs. 220",
+      "unit": "32g–47g Box",
+      "description": "Korea's iconic chocolate-dipped biscuit sticks. Available in crispy Almond, Cookies & Cream White Cookie, rich Choco Cookie, crunchy Crunky, and classic Milk Chocolate Original.",
+      "badge": "POPULAR",
+      "spiceLevel": 0,
+      "calories": "250 kcal",
+      "isVegetarian": true,
+      "inStock": true,
+      "image": "assets/images/lotte_pepero_collection.jpg",
+      "tags": ["Lotte", "Pepero", "Sweet Biscuit", "Imported Snack", "Almond", "Choco Cookie"]
     }
   ]
 }

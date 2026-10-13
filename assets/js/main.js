@@ -30,7 +30,10 @@ window.SELLER_WHATSAPP_CONFIG = SELLER_WHATSAPP_CONFIG;
 document.addEventListener('DOMContentLoaded', () => {
   // --- 1. Global State & Cart System ---
   const state = {
-    cart: JSON.parse(localStorage.getItem('seoulmandu_cart') || '[]'),
+    cart: (JSON.parse(localStorage.getItem('seoulmandu_cart') || '[]')).map(item => ({
+      ...item,
+      cartItemId: item.cartItemId || item.id
+    })),
     activeCategory: 'all',
     searchQuery: '',
     onlyVegetarian: false,
@@ -44,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavDrawer = document.querySelector('.mobile-nav-drawer');
   const mobileOverlay = document.querySelector('.mobile-overlay');
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-  
+
   const cartTriggerBtns = document.querySelectorAll('.btn-cart-trigger');
   const cartDrawer = document.querySelector('.cart-drawer');
   const cartBackdrop = document.querySelector('.cart-drawer-backdrop');
@@ -72,6 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuGrid = document.querySelector('.menu-cards-grid');
   const categoryFilterBtns = document.querySelectorAll('.filter-btn');
   const menuSearchInput = document.querySelector('.menu-search-input');
+  const headerSearchInput = document.querySelector('#headerSearchInput');
+  const headerSearchClear = document.querySelector('#headerSearchClear');
+  const mobileDrawerSearchInput = document.querySelector('#mobileDrawerSearchInput');
+  const categoryCards = document.querySelectorAll('.category-card');
+  const categoryResetTopBtn = document.querySelector('#categoryResetTopBtn');
+  const activeFilterBanner = document.querySelector('#activeFilterBanner');
+  const activeFilterText = document.querySelector('#activeFilterText');
+  const btnClearCategoryFilter = document.querySelector('#btnClearCategoryFilter');
   const vegToggleBtn = document.querySelector('.toggle-chip-veg');
 
   const foodModalBackdrop = document.querySelector('.food-modal-backdrop');
@@ -102,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const sectionTop = current.offsetTop - 120;
       const sectionId = current.getAttribute('id');
       const navItem = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-      
+
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
         if (navItem) navItem.classList.add('active');
       } else {
@@ -111,26 +122,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 4. Mobile Navigation Drawer ---
+  // --- 4. Mobile Navigation Drawer (react-burger-menu behavior) ---
+  const burgerOpenBtn = document.querySelector('#react-burger-menu-btn') || document.querySelector('.bm-burger-button') || document.querySelector('.mobile-menu-btn');
+  const burgerCloseBtn = document.querySelector('#react-burger-cross-btn') || document.querySelector('.bm-cross-button');
+
   function toggleMobileMenu(isOpen) {
     if (isOpen) {
-      if (mobileNavDrawer) mobileNavDrawer.scrollTop = 0;
-      mobileNavDrawer.classList.add('open');
-      mobileOverlay.classList.add('active');
-      mobileMenuBtn.classList.add('active');
+      if (mobileNavDrawer) {
+        mobileNavDrawer.scrollTop = 0;
+        mobileNavDrawer.classList.add('open');
+        mobileNavDrawer.setAttribute('aria-hidden', 'false');
+      }
+      if (mobileOverlay) mobileOverlay.classList.add('active');
+      if (mobileMenuBtn) mobileMenuBtn.classList.add('active');
       document.body.classList.add('modal-open');
+
+      // Autofocus first item (react-burger-menu accessibility)
+      const firstItem = mobileNavDrawer ? mobileNavDrawer.querySelector('.bm-item, .mobile-nav-link') : null;
+      if (firstItem) {
+        setTimeout(() => firstItem.focus(), 50);
+      }
     } else {
-      mobileNavDrawer.classList.remove('open');
-      mobileOverlay.classList.remove('active');
-      mobileMenuBtn.classList.remove('active');
+      if (mobileNavDrawer) {
+        mobileNavDrawer.classList.remove('open');
+        mobileNavDrawer.setAttribute('aria-hidden', 'true');
+      }
+      if (mobileOverlay) mobileOverlay.classList.remove('active');
+      if (mobileMenuBtn) mobileMenuBtn.classList.remove('active');
       document.body.classList.remove('modal-open');
+
+      // Return focus to menu button (react-burger-menu accessibility)
+      if (burgerOpenBtn) {
+        burgerOpenBtn.focus();
+      }
     }
   }
 
   if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-      const isOpen = mobileNavDrawer.classList.contains('open');
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = mobileNavDrawer && (mobileNavDrawer.classList.contains('open') || mobileNavDrawer.getAttribute('aria-hidden') === 'false');
       toggleMobileMenu(!isOpen);
+    });
+  }
+
+  if (burgerCloseBtn) {
+    burgerCloseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleMobileMenu(false);
     });
   }
 
@@ -140,6 +179,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => toggleMobileMenu(false));
+  });
+
+  // react-burger-menu keyboard navigation (Escape, ArrowUp, ArrowDown, Home, End)
+  window.addEventListener('keydown', (e) => {
+    const isMenuOpen = mobileNavDrawer && mobileNavDrawer.classList.contains('open');
+    if (!isMenuOpen) return;
+
+    if (e.key === 'Escape') {
+      toggleMobileMenu(false);
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      const items = Array.from(mobileNavDrawer.querySelectorAll('.bm-item, .mobile-nav-link'));
+      if (!items.length) return;
+      const curIdx = items.indexOf(document.activeElement);
+      e.preventDefault();
+      if (e.key === 'ArrowDown') {
+        const nextIdx = (curIdx + 1) % items.length;
+        items[nextIdx]?.focus();
+      } else {
+        const prevIdx = (curIdx - 1 + items.length) % items.length;
+        items[prevIdx]?.focus();
+      }
+    } else if (e.key === 'Home') {
+      const first = mobileNavDrawer.querySelector('.bm-item, .mobile-nav-link');
+      if (first) {
+        e.preventDefault();
+        first.focus();
+      }
+    } else if (e.key === 'End') {
+      const items = mobileNavDrawer.querySelectorAll('.bm-item, .mobile-nav-link');
+      if (items.length) {
+        e.preventDefault();
+        items[items.length - 1].focus();
+      }
+    }
   });
 
   // --- 5. Toast Notifications ---
@@ -185,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Filter by search query
     if (state.searchQuery.trim() !== '') {
       const q = state.searchQuery.toLowerCase();
-      items = items.filter(item => 
+      items = items.filter(item =>
         item.name.toLowerCase().includes(q) ||
         item.subname.toLowerCase().includes(q) ||
         item.description.toLowerCase().includes(q)
@@ -234,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
               <h3 class="food-card-name">${dish.name}</h3>
               <span class="food-card-price">${dish.price}</span>
             </div>
-            <div class="food-card-subname">${dish.subname}</div>
             <div class="food-card-tags">
               ${dish.tags.map(t => `<span class="food-tag-pill">${t}</span>`).join('')}
               ${dish.isVegetarian ? `<span class="food-tag-pill" style="color: var(--color-accent-sage);">🌱 Vegetarian</span>` : ''}
@@ -286,22 +358,252 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Category Filtering
+  // Category Definitions & Filtering
+  const CATEGORY_DISPLAY_NAMES = {
+    all: 'All Products',
+    ramen: 'Instant Noodles & Ramen',
+    snacks: 'Snacks & Chips',
+    sweets: 'Candies & Chocolates',
+    drinks: 'Drinks & Beverages',
+    sauces: 'Sauces & Condiments',
+    frozen: 'Frozen Foods & Dumplings'
+  };
+
+  function setCategory(catKey, shouldScroll = false) {
+    state.activeCategory = catKey || 'all';
+
+    // Update filter pills in #menu
+    categoryFilterBtns.forEach(btn => {
+      const isActive = btn.getAttribute('data-category') === state.activeCategory;
+      btn.classList.toggle('active', isActive);
+      if (isActive) {
+        const bar = document.querySelector('#menuFilterBar') || document.querySelector('.menu-filter-bar');
+        if (bar) {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+
+    // Update active filter banner
+    if (activeFilterBanner && activeFilterText) {
+      if (state.activeCategory !== 'all') {
+        const catName = CATEGORY_DISPLAY_NAMES[state.activeCategory] || state.activeCategory;
+        activeFilterText.textContent = `Showing: ${catName}`;
+        activeFilterBanner.style.display = 'flex';
+      } else {
+        activeFilterBanner.style.display = 'none';
+      }
+    }
+
+    renderMenu();
+
+    if (shouldScroll) {
+      const menuSection = document.querySelector('#menu');
+      if (menuSection) {
+        menuSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  // Category filter pills click
   categoryFilterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      categoryFilterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      state.activeCategory = btn.getAttribute('data-category');
-      renderMenu();
+      setCategory(btn.getAttribute('data-category'), false);
     });
   });
 
-  // Search input
+  // Category showcase cards click (Section C)
+  categoryCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const cat = card.getAttribute('data-category');
+      setCategory(cat, true);
+    });
+
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  // Reset category buttons (top & banner)
+  if (categoryResetTopBtn) {
+    categoryResetTopBtn.addEventListener('click', () => {
+      setCategory('all', true);
+    });
+  }
+
+  if (btnClearCategoryFilter) {
+    btnClearCategoryFilter.addEventListener('click', () => {
+      setCategory('all', false);
+    });
+  }
+
+  // --- Horizontal Category Scrolling (Wheel, Drag & Arrow Buttons) ---
+  const menuFilterBar = document.querySelector('#menuFilterBar') || document.querySelector('.menu-filter-bar');
+  const filterScrollPrev = document.querySelector('#filterScrollPrev');
+  const filterScrollNext = document.querySelector('#filterScrollNext');
+
+  if (menuFilterBar) {
+    function updateScrollArrows() {
+      if (!filterScrollPrev || !filterScrollNext) return;
+      const atStart = menuFilterBar.scrollLeft <= 4;
+      const atEnd = menuFilterBar.scrollLeft + menuFilterBar.clientWidth >= menuFilterBar.scrollWidth - 6;
+      filterScrollPrev.classList.toggle('is-disabled', atStart);
+      filterScrollNext.classList.toggle('is-disabled', atEnd);
+    }
+
+    // 1. Mouse wheel horizontal scrolling
+    menuFilterBar.addEventListener('wheel', (e) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        menuFilterBar.scrollLeft += e.deltaY;
+        updateScrollArrows();
+      }
+    }, { passive: false });
+
+    // 2. Click & drag to scroll (mouse swipe)
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+    let hasDragged = false;
+
+    menuFilterBar.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDown = true;
+      hasDragged = false;
+      menuFilterBar.classList.add('is-dragging');
+      startX = e.pageX - menuFilterBar.offsetLeft;
+      scrollLeft = menuFilterBar.scrollLeft;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDown) {
+        isDown = false;
+        menuFilterBar.classList.remove('is-dragging');
+      }
+    });
+
+    menuFilterBar.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - menuFilterBar.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 5) {
+        hasDragged = true;
+      }
+      menuFilterBar.scrollLeft = scrollLeft - walk;
+      updateScrollArrows();
+    });
+
+    // Suppress filter button click if the user was dragging
+    menuFilterBar.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (hasDragged) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          hasDragged = false;
+        }
+      }, true);
+    });
+
+    // 3. Arrow buttons scroll
+    if (filterScrollPrev) {
+      filterScrollPrev.addEventListener('click', () => {
+        menuFilterBar.scrollBy({ left: -260, behavior: 'smooth' });
+        setTimeout(updateScrollArrows, 350);
+      });
+    }
+
+    if (filterScrollNext) {
+      filterScrollNext.addEventListener('click', () => {
+        menuFilterBar.scrollBy({ left: 260, behavior: 'smooth' });
+        setTimeout(updateScrollArrows, 350);
+      });
+    }
+
+    menuFilterBar.addEventListener('scroll', updateScrollArrows, { passive: true });
+    window.addEventListener('resize', updateScrollArrows);
+    setTimeout(updateScrollArrows, 200);
+  }
+
+  // Synchronized Search Handling (Header, Drawer, Menu)
+  function handleSearchInput(query, sourceInput) {
+    state.searchQuery = query;
+
+    // Sync input values across all search fields
+    if (headerSearchInput && headerSearchInput !== sourceInput) {
+      headerSearchInput.value = query;
+    }
+    if (mobileDrawerSearchInput && mobileDrawerSearchInput !== sourceInput) {
+      mobileDrawerSearchInput.value = query;
+    }
+    if (menuSearchInput && menuSearchInput !== sourceInput) {
+      menuSearchInput.value = query;
+    }
+
+    if (headerSearchClear) {
+      headerSearchClear.style.display = query.trim() ? 'block' : 'none';
+    }
+
+    renderMenu();
+  }
+
+  if (headerSearchInput) {
+    headerSearchInput.addEventListener('input', (e) => {
+      handleSearchInput(e.target.value, headerSearchInput);
+    });
+
+    headerSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const menuSection = document.querySelector('#menu');
+        if (menuSection) menuSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  if (headerSearchClear) {
+    headerSearchClear.addEventListener('click', () => {
+      handleSearchInput('', null);
+      if (headerSearchInput) headerSearchInput.focus();
+    });
+  }
+
+  if (mobileDrawerSearchInput) {
+    mobileDrawerSearchInput.addEventListener('input', (e) => {
+      handleSearchInput(e.target.value, mobileDrawerSearchInput);
+    });
+
+    mobileDrawerSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        toggleMobileMenu(false);
+        const menuSection = document.querySelector('#menu');
+        if (menuSection) menuSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
   if (menuSearchInput) {
     menuSearchInput.addEventListener('input', (e) => {
-      state.searchQuery = e.target.value;
-      renderMenu();
+      handleSearchInput(e.target.value, menuSearchInput);
     });
+  }
+
+  // Handle URL Search Query Parameter (e.g. from mobile drawer search on legal pages)
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchParam = urlParams.get('search');
+    if (searchParam && searchParam.trim()) {
+      handleSearchInput(searchParam.trim(), null);
+      setTimeout(() => {
+        const menuSection = document.querySelector('#menu');
+        if (menuSection) menuSection.scrollIntoView({ behavior: 'smooth' });
+      }, 350);
+    }
+  } catch (err) {
+    // Graceful fallback
   }
 
   // Veg toggle
@@ -366,11 +668,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Render cart items with individual price, quantity stepper, and remove button
-      cartItemsList.innerHTML = state.cart.map(item => `
-        <div class="cart-item" data-id="${item.id}">
+      cartItemsList.innerHTML = state.cart.map(item => {
+        const itemKey = item.cartItemId || item.id;
+        return `
+        <div class="cart-item" data-id="${itemKey}">
           <img class="cart-item-img" src="${getSafeImageUrl(item.image)}" alt="${item.name}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/seoulmandu_logo.jpg';">
           <div class="cart-item-info">
             <h5>${item.name}</h5>
+            ${item.variant ? `<div class="cart-item-variant"><span>Flavor:</span> <strong>${item.variant}</strong></div>` : ''}
+            ${item.notes ? `<div class="cart-item-note">Note: "${item.notes}"</div>` : ''}
             <div class="cart-item-price-calc">
               <span class="unit-price">${SELLER_WHATSAPP_CONFIG.currency} ${item.priceRaw.toLocaleString()} each</span>
               <span class="line-total">• Total: ${SELLER_WHATSAPP_CONFIG.currency} ${(item.priceRaw * item.qty).toLocaleString()}</span>
@@ -378,11 +684,11 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="cart-item-actions">
             <div class="qty-stepper">
-              <button class="qty-btn btn-qty-minus" data-id="${item.id}" aria-label="Decrease quantity" title="Decrease quantity">-</button>
+              <button class="qty-btn btn-qty-minus" data-id="${itemKey}" aria-label="Decrease quantity" title="Decrease quantity">-</button>
               <span class="qty-display">${item.qty}</span>
-              <button class="qty-btn btn-qty-plus" data-id="${item.id}" aria-label="Increase quantity" title="Increase quantity">+</button>
+              <button class="qty-btn btn-qty-plus" data-id="${itemKey}" aria-label="Increase quantity" title="Increase quantity">+</button>
             </div>
-            <button class="btn-remove-item" data-id="${item.id}" aria-label="Remove item" title="Remove item from cart">
+            <button class="btn-remove-item" data-id="${itemKey}" aria-label="Remove item" title="Remove item from cart">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="3 6 5 6 21 6"></polyline>
                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -390,7 +696,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </button>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       // Attach Qty Stepper and Remove Listeners
       cartItemsList.querySelectorAll('.btn-qty-minus').forEach(btn => {
@@ -419,51 +726,62 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('seoulmandu_cart', JSON.stringify(state.cart));
   }
 
-  function addToCart(dishId, quantity = 1) {
+  function addToCart(dishId, quantity = 1, options = {}) {
     const dish = (window.SEOULMANDU_MENU || []).find(d => d.id === dishId);
     if (!dish) return;
 
-    const existingIndex = state.cart.findIndex(i => i.id === dishId);
+    const variantName = options.variant || '';
+    const customNote = (options.notes || '').trim();
+    const isOffer = !!options.isOffer;
+    const itemPriceRaw = (options.priceRaw !== undefined && options.priceRaw !== null) ? Number(options.priceRaw) : dish.priceRaw;
+    const cartItemId = options.cartItemId || (variantName ? `${dish.id}__${variantName.replace(/[^a-zA-Z0-9]/g, '_')}` : (isOffer ? `${dish.id}__offer` : dish.id));
+
+    const existingIndex = state.cart.findIndex(i => (i.cartItemId || i.id) === cartItemId && (i.notes || '') === customNote);
     if (existingIndex > -1) {
       state.cart[existingIndex].qty += quantity;
     } else {
       state.cart.push({
+        cartItemId: cartItemId,
         id: dish.id,
-        name: dish.name,
+        name: isOffer ? `${dish.name.split('(')[0].trim()} [Offer]` : dish.name,
         subname: dish.subname || '',
-        priceRaw: dish.priceRaw,
+        priceRaw: itemPriceRaw,
         image: dish.image,
-        qty: quantity
+        qty: quantity,
+        variant: variantName,
+        notes: customNote,
+        isOffer: isOffer
       });
     }
 
     updateCartUI();
-    showToast(`Added ${dish.name} to cart!`);
+    const itemLabel = isOffer ? `${dish.name.split('(')[0].trim()} (Offer)` : (variantName ? `${dish.name.split('(')[0].trim()} (${variantName})` : dish.name);
+    showToast(`Added ${quantity > 1 ? quantity + '× ' : ''}${itemLabel} to cart!`);
     toggleCartDrawer(true);
   }
 
-  function incrementCartItem(id) {
-    const item = state.cart.find(i => i.id === id);
+  function incrementCartItem(cartItemId) {
+    const item = state.cart.find(i => (i.cartItemId || i.id) === cartItemId);
     if (item) {
       item.qty += 1;
       updateCartUI();
     }
   }
 
-  function decrementCartItem(id) {
-    const itemIndex = state.cart.findIndex(i => i.id === id);
+  function decrementCartItem(cartItemId) {
+    const itemIndex = state.cart.findIndex(i => (i.cartItemId || i.id) === cartItemId);
     if (itemIndex > -1) {
       if (state.cart[itemIndex].qty > 1) {
         state.cart[itemIndex].qty -= 1;
         updateCartUI();
       } else {
-        removeCartItem(id);
+        removeCartItem(cartItemId);
       }
     }
   }
 
-  function removeCartItem(id) {
-    const itemIndex = state.cart.findIndex(i => i.id === id);
+  function removeCartItem(cartItemId) {
+    const itemIndex = state.cart.findIndex(i => (i.cartItemId || i.id) === cartItemId);
     if (itemIndex > -1) {
       const removedName = state.cart[itemIndex].name;
       state.cart.splice(itemIndex, 1);
@@ -661,6 +979,12 @@ document.addEventListener('DOMContentLoaded', () => {
     state.cart.forEach((item, index) => {
       const lineTotal = item.priceRaw * item.qty;
       message += `${index + 1}. *${item.name}*\n`;
+      if (item.variant) {
+        message += `   - Variant / Flavor: *${item.variant}*\n`;
+      }
+      if (item.notes) {
+        message += `   - Customer Note: _"${item.notes}"_\n`;
+      }
       message += `   - Qty: ${item.qty} × ${SELLER_WHATSAPP_CONFIG.currency} ${item.priceRaw.toLocaleString()} = *${SELLER_WHATSAPP_CONFIG.currency} ${lineTotal.toLocaleString()}*\n`;
     });
 
@@ -679,7 +1003,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Construct click-to-chat URL with pre-filled message
     const whatsappUrl = `https://wa.me/${SELLER_WHATSAPP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
-    
+
     // Open WhatsApp directly in new tab/app
     window.open(whatsappUrl, '_blank');
     showToast('Opening WhatsApp with your order & address details...', 'success');
@@ -689,87 +1013,334 @@ document.addEventListener('DOMContentLoaded', () => {
     whatsappCheckoutBtn.addEventListener('click', handleWhatsAppOrder);
   }
 
-  // --- 8. Food Detail Modal (Quick View) ---
-  function openFoodModal(dishId) {
+  // --- 8. Fullscreen Product Customizer & Detail View ---
+  function openFoodModal(dishId, offerOptions = null) {
     const dish = window.SEOULMANDU_MENU.find(d => d.id === dishId);
     if (!dish || !foodModalContent || !foodModalBackdrop) return;
 
     state.activeModalItem = dish;
 
+    // Check if dish has an active offer from SEOULMANDU_OFFERS or passed options
+    const activeOffer = offerOptions || (window.SEOULMANDU_OFFERS || []).find(o => o.dishId === dishId);
+    const effectivePriceRaw = activeOffer ? activeOffer.offerPrice : dish.priceRaw;
+
+    const variants = dish.variants || [];
+    let selectedVariant = variants.length > 0 ? variants[0] : null;
+    let currentQty = 1;
+
     const spiceText = dish.spice === 0 ? 'Mild & Savory' : dish.spice === 1 ? 'Medium Spice 🌶️' : 'Spicy Fire 🌶️🌶️';
+    const categoryName = dish.category === 'ramen' ? 'Instant Noodles & Ramen' :
+                         dish.category === 'snacks' ? 'Snacks & Chips' :
+                         dish.category === 'sweets' ? 'Candies & Chocolates' :
+                         dish.category === 'drinks' ? 'Drinks & Beverages' :
+                         dish.category === 'sauces' ? 'Sauces & Condiments' :
+                         dish.category === 'frozen' ? 'Frozen Foods & Dumplings' : 'Korean Grocery';
 
-    foodModalContent.innerHTML = `
-      <div class="food-modal-img-wrap">
-        <img src="${getSafeImageUrl(dish.image)}" alt="${dish.name}" onerror="this.onerror=null; this.src='assets/images/seoulmandu_logo.jpg';">
-        <div style="position: absolute; top: 18px; left: 18px;">
-          <span class="badge-pill red">${dish.badge}</span>
-        </div>
-      </div>
-      <div class="food-modal-content">
-        <button class="btn-close-modal" id="modalCloseAction">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+    function getSubtotal() {
+      return effectivePriceRaw * currentQty;
+    }
 
-        <span class="korean-sub" style="color: var(--color-accent-sage); font-size: 0.88rem; margin-bottom: 6px;">
-          ${dish.subname}
-        </span>
-        <h2 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 800; color: #FFFFFF; line-height: 1.15; margin-bottom: 12px;">
-          ${dish.name}
-        </h2>
-        <div style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px;">
-          ${dish.price}
-        </div>
-        
-        <p style="font-size: 0.92rem; line-height: 1.65; color: var(--color-text-gray-light); margin-bottom: 22px;">
-          ${dish.description}
-        </p>
+    function renderModalUI() {
+      const subtotal = getSubtotal();
 
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; padding: 14px; background: rgba(255,255,255,0.04); border-radius: 12px;">
-          <div>
-            <span style="font-size: 0.7rem; color: var(--color-text-gray-muted); display: block; text-transform: uppercase;">Portion</span>
-            <strong style="font-size: 0.85rem; color: #FFFFFF;">${dish.pieces}</strong>
+      foodModalContent.innerHTML = `
+        <!-- Fullscreen Top Header -->
+        <header class="fsc-header">
+          <div class="fsc-header-left">
+            <button type="button" class="fsc-back-btn" id="fscBackBtn" aria-label="Back to store">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Back to Store</span>
+              <span class="fsc-back-kr">쇼핑 계속하기</span>
+            </button>
+            <div class="fsc-breadcrumb">
+              <span>Seoulmandu</span>
+              <span class="sep">/</span>
+              <span>${categoryName.split(' ')[0]}</span>
+              <span class="sep">/</span>
+              <span class="active">${dish.name.split('(')[0].trim()}</span>
+            </div>
           </div>
-          <div>
-            <span style="font-size: 0.7rem; color: var(--color-text-gray-muted); display: block; text-transform: uppercase;">Spice Gauge</span>
-            <strong style="font-size: 0.85rem; color: var(--color-spice-red, #D94F45);">${spiceText}</strong>
+          <div class="fsc-header-right">
+            <button type="button" class="fsc-cart-btn" id="fscCartShortcut" aria-label="View Order Cart">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+              <span>Cart</span>
+              <span class="fsc-cart-badge">${state.cart.reduce((s, i) => s + i.qty, 0)}</span>
+            </button>
+            <button type="button" class="fsc-close-btn" id="modalCloseAction" aria-label="Close customizer">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
           </div>
-          <div>
-            <span style="font-size: 0.7rem; color: var(--color-text-gray-muted); display: block; text-transform: uppercase;">Calories</span>
-            <strong style="font-size: 0.85rem; color: #FFFFFF;">${dish.calories}</strong>
+        </header>
+
+        <!-- Fullscreen Scrollable Body -->
+        <div class="fsc-body">
+          <div class="fsc-container">
+            <!-- Left: Visual Column (Compact & Anchored) -->
+            <div class="fsc-visual-col">
+              <div class="fsc-thumb-card">
+                <img src="${getSafeImageUrl(dish.image)}" alt="${dish.name}" onerror="this.onerror=null; this.src='assets/images/seoulmandu_logo.jpg';">
+              </div>
+
+              <div class="fsc-compact-specs">
+                <div class="fsc-spec-line">
+                  <span class="fsc-spec-k">Portion Size</span>
+                  <span class="fsc-spec-v">${dish.pieces || 'Standard pack'}</span>
+                </div>
+                <div class="fsc-spec-line">
+                  <span class="fsc-spec-k">Spice Gauge</span>
+                  <span class="fsc-spec-v ${dish.spice > 0 ? 'text-spice' : ''}">${spiceText}</span>
+                </div>
+                <div class="fsc-spec-line">
+                  <span class="fsc-spec-k">Calories</span>
+                  <span class="fsc-spec-v">${dish.calories || '—'}</span>
+                </div>
+                <div class="fsc-spec-line">
+                  <span class="fsc-spec-k">Dietary</span>
+                  <span class="fsc-spec-v ${dish.isVegetarian ? 'text-veg' : ''}">${dish.isVegetarian ? 'Vegetarian' : 'Standard'}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Hero Customizable Section -->
+            <div class="fsc-hero-col">
+              <div class="fsc-product-header">
+                <h1 class="fsc-title">${dish.name}</h1>
+                <div class="fsc-price-row">
+                  <span class="fsc-price">Rs. ${effectivePriceRaw}</span>
+                  ${activeOffer ? `<del style="color: var(--color-text-gray-muted); text-decoration: line-through; margin-left: 8px; font-size: 1.05rem;">${dish.price}</del><span style="margin-left: 8px; background: rgba(255, 90, 95, 0.16); border: 1px solid rgba(255, 90, 95, 0.4); color: #FF5A5F; font-weight: 800; font-size: 0.74rem; padding: 2px 8px; border-radius: var(--radius-full);">${activeOffer.discountLabel || 'SPECIAL OFFER'}</span>` : ''}
+                  <span class="fsc-price-unit">/ ${dish.pieces || 'unit'}</span>
+                  <span class="fsc-stock-badge"><span class="fsc-pulse-dot"></span> In Stock in Dharan</span>
+                </div>
+                ${(dish.tags && dish.tags.length > 0) ? `
+                  <div class="fsc-tags-row">
+                    ${dish.tags.map(t => `<span class="food-tag-pill">${t}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Customizable Hero Controls -->
+              <div class="fsc-customizer-hero">
+                ${variants.length > 0 ? `
+                  <div class="fsc-section-block">
+                    <div class="fsc-block-header">
+                      <label class="fsc-label">
+                        <span>Select Flavor / Variety</span>
+                        <span class="fsc-req-pill">Required</span>
+                      </label>
+                      <span class="fsc-current-selection">${selectedVariant ? selectedVariant.name.split('(')[0].trim() : ''}</span>
+                    </div>
+
+                    <div class="fsc-variants-grid" role="radiogroup" aria-label="Product Flavors">
+                      ${variants.map(v => {
+                        const isSelected = selectedVariant && selectedVariant.id === v.id;
+                        return `
+                          <div class="fsc-variant-chip ${isSelected ? 'active' : ''}" data-variant-id="${v.id}" role="radio" aria-checked="${isSelected}" tabindex="0">
+                            <div class="fsc-radio-indicator">
+                              <div class="fsc-radio-dot"></div>
+                            </div>
+                            <div class="fsc-variant-body">
+                              <div class="fsc-variant-top">
+                                <span class="fsc-variant-name">${v.name}</span>
+                                ${v.badge ? `<span class="fsc-v-badge ${v.badge.includes('POP') ? 'gold' : 'red'}">${v.badge}</span>` : ''}
+                              </div>
+                              <span class="fsc-variant-detail">${v.desc}</span>
+                            </div>
+                          </div>
+                        `;
+                      }).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+
+                <!-- Quantity Stepper -->
+                <div class="fsc-section-block">
+                  <div class="fsc-block-header">
+                    <label class="fsc-label">Quantity</label>
+                  </div>
+                  <div class="fsc-config-row">
+                    <div class="fsc-stepper-box">
+                      <button type="button" class="fsc-step-btn" id="fscQtyMinus" aria-label="Decrease quantity" ${currentQty <= 1 ? 'disabled' : ''}>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                      </button>
+                      <span class="fsc-step-num" id="fscQtyDisplay">${currentQty}</span>
+                      <button type="button" class="fsc-step-btn" id="fscQtyPlus" aria-label="Increase quantity">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                          <line x1="12" y1="5" x2="12" y2="19"></line>
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                      </button>
+                    </div>
+                    <div class="fsc-subtotal-box">
+                      <div class="fsc-opt-hint">Estimated Subtotal</div>
+                      <span class="fsc-total-val" id="fscSubtotalVal">${SELLER_WHATSAPP_CONFIG.currency} ${subtotal.toLocaleString()}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Special Requests / Notes -->
+                <div class="fsc-section-block">
+                  <div class="fsc-block-header">
+                    <label for="fscSpecialNotes" class="fsc-label">
+                      <span>Special Instructions / Notes</span>
+                      <span class="fsc-opt-hint">(Optional)</span>
+                    </label>
+                  </div>
+                  <textarea id="fscSpecialNotes" class="fsc-notes-field" rows="2" placeholder="e.g. Please mix 2 Almond & 1 White Cookie, pack well-chilled, or add packaging note..."></textarea>
+                </div>
+
+                <!-- Action Buttons (Desktop) -->
+                <div class="fsc-actions-row">
+                  <button type="button" class="btn btn-primary fsc-main-add-btn" id="fscSubmitAddBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span id="fscBtnText">Add ${currentQty > 1 ? currentQty + '× ' : ''}to Order • ${SELLER_WHATSAPP_CONFIG.currency} ${subtotal.toLocaleString()}</span>
+                  </button>
+                  <button type="button" class="btn btn-outline fsc-close-alt-btn" id="fscSecondaryBack">
+                    Back to Menu
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div style="display: flex; gap: 12px; margin-top: auto;">
-          <button class="btn btn-primary" id="modalAddBtn" style="flex: 1;">
+        <!-- Sticky Bottom Bar for Mobile Devices -->
+        <div class="fsc-mobile-bottom-bar">
+          <div class="fsc-mobile-price-block">
+            <span class="fsc-mobile-price-label">Total for ${currentQty} pack${currentQty > 1 ? 's' : ''}:</span>
+            <span class="fsc-mobile-price-val" id="fscMobileTotalVal">${SELLER_WHATSAPP_CONFIG.currency} ${subtotal.toLocaleString()}</span>
+          </div>
+          <button type="button" class="btn btn-primary fsc-mobile-add-btn" id="fscMobileAddBtn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            Add to Order
+            <span>Add to Order</span>
           </button>
         </div>
-      </div>
-    `;
+      `;
+
+      // Attach internal listeners
+      attachModalEvents();
+    }
+
+    function attachModalEvents() {
+      // Close actions
+      const closeBtn = foodModalContent.querySelector('#modalCloseAction');
+      if (closeBtn) closeBtn.addEventListener('click', closeFoodModal);
+
+      const backBtn = foodModalContent.querySelector('#fscBackBtn');
+      if (backBtn) backBtn.addEventListener('click', closeFoodModal);
+
+      const secBackBtn = foodModalContent.querySelector('#fscSecondaryBack');
+      if (secBackBtn) secBackBtn.addEventListener('click', closeFoodModal);
+
+      // Cart shortcut
+      const cartShortcut = foodModalContent.querySelector('#fscCartShortcut');
+      if (cartShortcut) {
+        cartShortcut.addEventListener('click', () => {
+          closeFoodModal();
+          toggleCartDrawer(true);
+        });
+      }
+
+      // Variant selection
+      foodModalContent.querySelectorAll('.fsc-variant-chip, .fsc-variant-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const varId = item.getAttribute('data-variant-id');
+          const found = variants.find(v => v.id === varId);
+          if (found) {
+            selectedVariant = found;
+            const existingNotes = foodModalContent.querySelector('#fscSpecialNotes')?.value || '';
+            renderModalUI();
+            const notesEl = foodModalContent.querySelector('#fscSpecialNotes');
+            if (notesEl) notesEl.value = existingNotes;
+          }
+        });
+
+        item.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            item.click();
+          }
+        });
+      });
+
+      // Stepper
+      const qtyMinus = foodModalContent.querySelector('#fscQtyMinus');
+      const qtyPlus = foodModalContent.querySelector('#fscQtyPlus');
+      const qtyDisplay = foodModalContent.querySelector('#fscQtyDisplay');
+      const subtotalVal = foodModalContent.querySelector('#fscSubtotalVal');
+      const btnText = foodModalContent.querySelector('#fscBtnText');
+      const mobileTotalVal = foodModalContent.querySelector('#fscMobileTotalVal');
+
+      function updateQtyUI() {
+        if (qtyDisplay) qtyDisplay.textContent = currentQty;
+        if (qtyMinus) qtyMinus.disabled = currentQty <= 1;
+        const total = getSubtotal();
+        const totalStr = `${SELLER_WHATSAPP_CONFIG.currency} ${total.toLocaleString()}`;
+        if (subtotalVal) subtotalVal.textContent = totalStr;
+        if (btnText) btnText.textContent = `Add ${currentQty > 1 ? currentQty + '× ' : ''}to Order • ${totalStr}`;
+        if (mobileTotalVal) mobileTotalVal.textContent = totalStr;
+      }
+
+      if (qtyMinus) {
+        qtyMinus.addEventListener('click', () => {
+          if (currentQty > 1) {
+            currentQty -= 1;
+            updateQtyUI();
+          }
+        });
+      }
+
+      if (qtyPlus) {
+        qtyPlus.addEventListener('click', () => {
+          if (currentQty < 99) {
+            currentQty += 1;
+            updateQtyUI();
+          }
+        });
+      }
+
+      // Add to Order handlers
+      function handleOrderAdd() {
+        const notes = (foodModalContent.querySelector('#fscSpecialNotes')?.value || '').trim();
+        const chosenVariantName = selectedVariant ? selectedVariant.name : '';
+        addToCart(dish.id, currentQty, {
+          variant: chosenVariantName,
+          notes: notes,
+          priceRaw: effectivePriceRaw,
+          isOffer: !!activeOffer
+        });
+        closeFoodModal();
+      }
+
+      const submitAddBtn = foodModalContent.querySelector('#fscSubmitAddBtn');
+      if (submitAddBtn) submitAddBtn.addEventListener('click', handleOrderAdd);
+
+      const mobileAddBtn = foodModalContent.querySelector('#fscMobileAddBtn');
+      if (mobileAddBtn) mobileAddBtn.addEventListener('click', handleOrderAdd);
+    }
+
+    renderModalUI();
 
     foodModalBackdrop.classList.add('active');
     document.body.classList.add('modal-open');
-
-    // Attach internal listeners
-    const modalClose = foodModalContent.querySelector('#modalCloseAction');
-    if (modalClose) {
-      modalClose.addEventListener('click', closeFoodModal);
-    }
-
-    const modalAdd = foodModalContent.querySelector('#modalAddBtn');
-    if (modalAdd) {
-      modalAdd.addEventListener('click', () => {
-        addToCart(dish.id);
-        closeFoodModal();
-      });
-    }
+    foodModalContent.scrollTop = 0;
   }
 
   function closeFoodModal() {
@@ -779,12 +1350,213 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Keyboard Escape listener
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (foodModalBackdrop && foodModalBackdrop.classList.contains('active')) {
+        closeFoodModal();
+      } else if (cartDrawer && cartDrawer.classList.contains('open')) {
+        toggleCartDrawer(false);
+      }
+    }
+  });
+
   if (foodModalBackdrop) {
     foodModalBackdrop.addEventListener('click', (e) => {
       if (e.target === foodModalBackdrop) {
         closeFoodModal();
       }
     });
+  }
+
+  // --- 8.5. Hero Product Spotlight Carousel ---
+  const heroCarousel = document.querySelector('#heroCarousel');
+  if (heroCarousel) {
+    const slides = heroCarousel.querySelectorAll('.hero-carousel-slide');
+    const tabs = heroCarousel.querySelectorAll('.carousel-tab');
+    const prevBtn = heroCarousel.querySelector('#carouselPrevBtn');
+    const nextBtn = heroCarousel.querySelector('#carouselNextBtn');
+    const autoplayToggleBtn = heroCarousel.querySelector('#carouselAutoplayToggle');
+    const autoplayIcon = heroCarousel.querySelector('#carouselAutoplayIcon');
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let autoplayTimer = null;
+    let isPausedManually = false;
+    let isHovered = false;
+    const AUTOPLAY_DELAY = 3600; // Snappy 3.6s auto-play interval
+
+    function goToSlide(index) {
+      if (!totalSlides) return;
+      currentSlide = (index + totalSlides) % totalSlides;
+
+      slides.forEach((slide, i) => {
+        const isActive = i === currentSlide;
+        slide.classList.toggle('active', isActive);
+        slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+
+      tabs.forEach((tab, i) => {
+        const isActive = i === currentSlide;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+        // Smooth progress animation on active tab
+        const progress = tab.querySelector('.tab-progress');
+        if (progress) {
+          if (isActive && !isPausedManually && !isHovered) {
+            progress.style.transition = 'none';
+            progress.style.width = '0%';
+            void progress.offsetWidth; // Force reflow
+            progress.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
+            progress.style.width = '100%';
+          } else {
+            progress.style.transition = 'none';
+            progress.style.width = '0%';
+          }
+        }
+      });
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (!isPausedManually && !isHovered) {
+        autoplayTimer = setInterval(() => {
+          goToSlide(currentSlide + 1);
+        }, AUTOPLAY_DELAY);
+      }
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        goToSlide(currentSlide - 1);
+        startAutoplay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        goToSlide(currentSlide + 1);
+        startAutoplay();
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = parseInt(tab.getAttribute('data-slide-target'), 10);
+        if (!isNaN(target)) {
+          goToSlide(target);
+          startAutoplay();
+        }
+      });
+    });
+
+    if (autoplayToggleBtn && autoplayIcon) {
+      autoplayToggleBtn.addEventListener('click', () => {
+        isPausedManually = !isPausedManually;
+        if (isPausedManually) {
+          stopAutoplay();
+          autoplayIcon.textContent = '▶';
+          autoplayToggleBtn.setAttribute('aria-label', 'Resume slideshow auto play');
+          autoplayToggleBtn.setAttribute('title', 'Resume Slideshow');
+        } else {
+          autoplayIcon.textContent = '⏸';
+          autoplayToggleBtn.setAttribute('aria-label', 'Pause slideshow auto play');
+          autoplayToggleBtn.setAttribute('title', 'Pause Slideshow');
+          startAutoplay();
+        }
+      });
+    }
+
+    heroCarousel.addEventListener('mouseenter', () => {
+      isHovered = true;
+      stopAutoplay();
+    });
+
+    heroCarousel.addEventListener('mouseleave', () => {
+      isHovered = false;
+      startAutoplay();
+    });
+
+    // Touch Swipe Support (Precise horizontal detection)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    heroCarousel.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    heroCarousel.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+        startAutoplay();
+      }
+    }, { passive: true });
+
+    // Keyboard Arrow Navigation
+    heroCarousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        goToSlide(currentSlide - 1);
+        startAutoplay();
+      } else if (e.key === 'ArrowRight') {
+        goToSlide(currentSlide + 1);
+        startAutoplay();
+      }
+    });
+
+    // Hero Slide Action Buttons (Add to Cart & Quick View)
+    heroCarousel.querySelectorAll('.btn-hero-add').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-id');
+        const offerPriceAttr = btn.getAttribute('data-offer-price');
+        const offerPrice = offerPriceAttr ? parseInt(offerPriceAttr, 10) : null;
+        if (id) {
+          addToCart(id, 1, offerPrice ? { priceRaw: offerPrice, isOffer: true } : {});
+          const span = btn.querySelector('span');
+          if (span && !btn.dataset.adding) {
+            btn.dataset.adding = 'true';
+            const oldText = span.textContent;
+            span.textContent = '✓ Added to Cart';
+            setTimeout(() => {
+              span.textContent = oldText;
+              delete btn.dataset.adding;
+            }, 1200);
+          }
+        }
+      });
+    });
+
+    heroCarousel.querySelectorAll('.btn-hero-quickview').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-id');
+        const offerPriceAttr = btn.getAttribute('data-offer-price');
+        const offerPrice = offerPriceAttr ? parseInt(offerPriceAttr, 10) : null;
+        if (id) {
+          openFoodModal(id, offerPrice ? { offerPrice: offerPrice, isOffer: true } : null);
+        }
+      });
+    });
+
+    // Initialize initial slide & timer
+    goToSlide(0);
+    startAutoplay();
   }
 
   // --- 9. Featured Dishes Add Buttons ---

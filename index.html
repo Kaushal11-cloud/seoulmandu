@@ -45,34 +45,44 @@
        ========================================================================= -->
   <header class="site-header" id="siteHeader">
     <div class="container container-wide navbar-container">
-      <!-- Brand Logo -->
+      <!-- Brand Logo (Clear, Crisp & Premium) -->
       <a href="#hero" class="brand-logo" aria-label="Seoulmandu Korean Mart Home">
         <img src="assets/images/seoulmandu_logo.jpg" alt="Seoulmandu Korean Mart Logo" class="brand-logo-img">
         <div class="brand-text">
-          <span class="brand-title" aria-label="Seoulmandu">Seou<span class="brand-tower-l" aria-hidden="true"><svg
-                viewBox="0 0 32 96">
-                <path
-                  d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
+          <span class="brand-title" aria-label="Seoulmandu">Seou<span class="brand-tower-l" aria-hidden="true"><svg viewBox="0 0 32 96">
+                <path d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
               </svg></span>mandu</span>
-          <span class="brand-sub">KOREAN MART DRN</span>
+          <span class="brand-sub">KOREAN MART</span>
         </div>
       </a>
 
-      <!-- Desktop Navigation Links -->
-      <nav class="nav-links" aria-label="Main Navigation">
-        <a href="#hero" class="nav-link active">Home</a>
-        <a href="#about" class="nav-link">Our Story</a>
-        <a href="#featured" class="nav-link">Bestsellers</a>
-        <a href="#menu" class="nav-link">Items</a>
-        <a href="#seoul-ktm" class="nav-link">Seoul × Dharan</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="#location" class="nav-link">Locations</a>
-        <a href="#reviews" class="nav-link">Reviews</a>
-      </nav>
+      <!-- Desktop Navigation Links + Search Bar Beside Locations -->
+      <div class="nav-center-group">
+        <nav class="nav-links" aria-label="Main Navigation">
+          <a href="#hero" class="nav-link active">Home</a>
+          <a href="#menu" class="nav-link">Products</a>
+          <a href="#featured" class="nav-link">Bestsellers</a>
+          <a href="#about" class="nav-link">Our Story</a>
+          <a href="#location" class="nav-link">Locations</a>
+        </nav>
+
+        <!-- Product Search Bar (Beside Locations in Desktop View) -->
+        <div class="header-search-wrap" role="search">
+          <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="headerSearchInput" class="header-search-input"
+            placeholder="Search noodles, snacks, drinks..." aria-label="Search mart products">
+          <button type="button" class="header-search-clear" id="headerSearchClear" aria-label="Clear search query"
+            style="display: none;">✕</button>
+        </div>
+      </div>
 
       <!-- Right Header Actions -->
       <div class="nav-actions">
-        <!-- Interactive Cart Trigger -->
+        <!-- Interactive Cart Trigger with Live Item Count -->
         <button class="btn-cart-trigger" id="cartOpenBtn" aria-label="Open Order Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -84,7 +94,7 @@
         </button>
 
         <!-- CTA Order Button -->
-        <a href="#menu" class="btn btn-primary btn-sm">
+        <a href="#menu" class="btn btn-primary btn-sm btn-header-cta">
           <span>Order Now</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
@@ -93,86 +103,111 @@
           </svg>
         </a>
 
-        <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <!-- Mobile Menu Toggle Button (react-burger-menu) -->
+        <div class="bm-burger-button mobile-menu-btn" id="mobileMenuBtn">
+          <button type="button" id="react-burger-menu-btn" aria-label="Open Menu">Open Menu</button>
+          <span>
+            <span class="bm-burger-bars"></span>
+            <span class="bm-burger-bars"></span>
+            <span class="bm-burger-bars"></span>
+          </span>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer -->
-  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
-    <div class="mobile-drawer-header">
-      <img src="assets/images/seoulmandu_logo.jpg" alt="Seoulmandu Korean Mart" class="mobile-drawer-logo">
-      <div>
-        <div class="mobile-drawer-brand" aria-label="Seoulmandu">Seou<span class="brand-tower-l" aria-hidden="true"><svg
-              viewBox="0 0 32 96">
-              <path
-                d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
-            </svg></span>mandu</div>
-        <div class="mobile-drawer-sub">KOREAN MART DRN</div>
-      </div>
-    </div>
-    <div class="mobile-nav-links">
-      <a href="#hero" class="mobile-nav-link">
-        <span>Home</span>
-      </a>
-      <a href="#about" class="mobile-nav-link">
-        <span>Our Story</span>
-      </a>
-      <a href="#featured" class="mobile-nav-link">
-        <span>Bestsellers</span>
-      </a>
-      <a href="#menu" class="mobile-nav-link">
-        <span>Items</span>
-      </a>
-      <a href="#seoul-ktm" class="mobile-nav-link">
-        <span>Seoul × Dharan</span>
-      </a>
-      <a href="#experience" class="mobile-nav-link">
-        <span>Food Experience</span>
-      </a>
-      <a href="#social" class="mobile-nav-link">
-        <span>Instagram</span>
-      </a>
-      <a href="#location" class="mobile-nav-link">
-        <span>Find Us</span>
-      </a>
-      <a href="#reviews" class="mobile-nav-link">
-        <span>Reviews</span>
-      </a>
-      <a href="privacypolicy.html" class="mobile-nav-link">
-        <span>Privacy Policy</span>
-      </a>
-      <a href="termsofservice.html" class="mobile-nav-link">
-        <span>Terms of Service</span>
-      </a>
+  <!-- Mobile Navigation Drawer (react-burger-menu) -->
+  <aside class="bm-menu-wrap mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation" aria-hidden="true">
+    <!-- Close Cross Button (react-burger-menu) -->
+    <div class="bm-cross-button" id="bmCrossBtn">
+      <button type="button" id="react-burger-cross-btn" aria-label="Close Menu">Close Menu</button>
+      <span>
+        <span class="bm-cross"></span>
+        <span class="bm-cross"></span>
+      </span>
     </div>
 
-    <div class="mobile-drawer-bottom">
-      <button class="btn btn-primary" onclick="document.querySelector('#cartOpenBtn').click()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
+    <div class="bm-menu">
+      <div class="mobile-drawer-header">
+        <img src="assets/images/seoulmandu_logo.jpg" alt="Seoulmandu Korean Mart" class="mobile-drawer-logo">
+        <div class="mobile-drawer-brand-wrap">
+          <div class="mobile-drawer-brand" aria-label="Seoulmandu">Seou<span class="brand-tower-l" aria-hidden="true"><svg viewBox="0 0 32 96">
+                <path d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
+              </svg></span>mandu</div>
+          <div class="mobile-drawer-sub">KOREAN MART</div>
+        </div>
+      </div>
+
+      <!-- Mobile Drawer Search Field -->
+      <div class="mobile-drawer-search-wrap" role="search">
+        <svg class="mobile-drawer-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-        <span>Open My Order (<span class="cart-count">0</span>)</span>
-      </button>
-      <div style="font-size: 0.78rem; color: var(--color-text-gray-muted); text-align: center; display: flex; flex-direction: column; gap: 4px;">
-        <div>Instagram: <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
-            style="color: var(--color-primary); font-weight: 700;">@seoulmandu.store</a></div>
-        <div>TikTok: <a href="https://www.tiktok.com/@seoulmandu" target="_blank" rel="noopener noreferrer"
-            style="color: #25F4EE; font-weight: 700;">@seoulmandu</a></div>
+        <input type="text" id="mobileDrawerSearchInput" class="mobile-drawer-search-input"
+          placeholder="Search noodles, snacks, drinks..." aria-label="Search products">
+      </div>
+
+      <nav class="bm-item-list mobile-nav-links" aria-label="Mobile Navigation">
+        <a href="#hero" class="bm-item mobile-nav-link">
+          <span>Home</span>
+          <span class="korean-hint">홈</span>
+        </a>
+        <a href="#menu" class="bm-item mobile-nav-link">
+          <span>Products</span>
+          <span class="korean-hint">전체 품목</span>
+        </a>
+        <a href="#featured" class="bm-item mobile-nav-link">
+          <span>Bestsellers</span>
+          <span class="korean-hint">인기 상품</span>
+        </a>
+        <a href="#about" class="bm-item mobile-nav-link">
+          <span>Our Story</span>
+          <span class="korean-hint">소개</span>
+        </a>
+        <a href="#location" class="bm-item mobile-nav-link">
+          <span>Locations</span>
+          <span class="korean-hint">매장 위치</span>
+        </a>
+        <a href="#reviews" class="bm-item mobile-nav-link">
+          <span>Reviews</span>
+          <span class="korean-hint">후기</span>
+        </a>
+        <a href="privacypolicy.html" class="bm-item mobile-nav-link">
+          <span>Privacy Policy</span>
+        </a>
+        <a href="termsofservice.html" class="bm-item mobile-nav-link">
+          <span>Terms of Service</span>
+        </a>
+      </nav>
+
+      <div class="mobile-drawer-bottom">
+        <button class="btn btn-primary" onclick="document.querySelector('#cartOpenBtn').click()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+          </svg>
+          <span>Open My Order (<span class="cart-count">0</span>)</span>
+        </button>
+        <div
+          style="font-size: 0.78rem; color: var(--color-text-gray-muted); text-align: center; display: flex; flex-direction: column; gap: 4px;">
+          <div>Instagram: <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
+              style="color: var(--color-primary); font-weight: 700;">@seoulmandu.store</a></div>
+          <div>TikTok: <a href="https://www.tiktok.com/@seoulmandu" target="_blank" rel="noopener noreferrer"
+              style="color: #25F4EE; font-weight: 700;">@seoulmandu</a></div>
+        </div>
       </div>
     </div>
   </aside>
-  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="bm-overlay mobile-overlay" id="mobileOverlay"></div>
 
   <main id="mainContent">
     <!-- =========================================================================
          2. HERO SECTION (DRAMATIC FULL-SCREEN)
+         ========================================================================= -->
+    <!-- =========================================================================
+         2. HERO SECTION (E-COMMERCE PRODUCT SPOTLIGHT CAROUSEL)
          ========================================================================= -->
     <section class="hero-section" id="hero">
       <!-- Background Media -->
@@ -184,34 +219,282 @@
 
       <div class="container hero-content">
 
-        <!-- Main Headline -->
-        <h1 class="hero-headline" aria-label="UNWRAP THE TASTE OF KOREA.">
-          <span class="hero-line-top"><span class="hero-spacer-t" aria-hidden="true">T</span>UNWRAP THE</span>
-          <span class="hero-line-bottom text-gradient-red text-gradient-primary">TASTE OF KOREA.</span>
-        </h1>
+        <!-- E-Commerce Hero Product Carousel (Starts directly after navbar) -->
 
+        <!-- Special Offers & Promotional Deals Carousel -->
+        <!-- NOTE: Only promotional offers and discounted items can be added in this section -->
+        <div class="hero-carousel-card hero-offers-card" id="heroCarousel" role="region" aria-roledescription="carousel" aria-label="Special Offers and Exclusive Deals">
+          
+          <!-- Top Offer Section Header Banner -->
+          <div class="hero-offer-topbar">
+            <div class="hero-offer-topbar-left">
+              <span class="hero-offer-flame">🔥</span>
+              <span class="hero-offer-title">SPECIAL MART OFFERS &amp; DEALS</span>
+              <span class="hero-offer-kr">특가 세일</span>
+            </div>
+            <div class="hero-offer-topbar-right">
+              <span class="hero-offer-pill">⚡ Limited-Time Discounts • Dharan Mart Exclusive</span>
+            </div>
+          </div>
 
-        <!-- CTA Actions -->
-        <div class="hero-actions">
-          <a href="#menu" class="btn btn-primary">
-            <span>ORDER NOW</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
+          <!-- Slide Navigation Arrows -->
+          <button type="button" class="hero-carousel-arrow prev" id="carouselPrevBtn" aria-label="Previous offer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-          </a>
-          <a href="#menu" class="btn btn-outline">
-            <span>EXPLORE ITEMS</span>
-          </a>
-          <a href="https://www.instagram.com/seoulmandu.store" target="_blank" class="btn btn-outline"
-            style="border-color: rgba(255,255,255,0.18);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </button>
+          <button type="button" class="hero-carousel-arrow next" id="carouselNextBtn" aria-label="Next offer">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
-            <span>@seoulmandu.store</span>
+          </button>
+
+          <!-- Carousel Track Container (Offers Only) -->
+          <div class="hero-carousel-track" id="carouselTrack">
+
+            <!-- Offer Slide 0: Samyang Buldak & Shin Ramyun Pack (22% OFF) -->
+            <article class="hero-carousel-slide active" data-slide-index="0" role="group" aria-roledescription="slide" aria-label="Offer 1 of 4: Buldak &amp; Shin Ramyun Pack">
+              <div class="hero-slide-grid">
+                <div class="hero-slide-info">
+                  <div class="hero-slide-tag-row">
+                    <span class="hero-slide-cat">🍜 Instant Noodles &amp; Ramen</span>
+                    <span class="badge-pill red">🔥 22% OFF • LIMITED DEAL</span>
+                  </div>
+                  <h2 class="hero-slide-title">Samyang Buldak &amp; Shin Ramyun Pack</h2>
+                  <div class="hero-slide-chips">
+                    <span class="slide-chip">🔥 Save Rs. 70 Today</span>
+                    <span class="slide-chip">📦 5-Pack Multipack</span>
+                    <span class="slide-chip">⚡ Ready in 3 mins</span>
+                  </div>
+                  <div class="hero-slide-actions-row">
+                    <div class="hero-slide-price-group">
+                      <div class="hero-slide-price">
+                        <span class="price-symbol">Rs.</span>
+                        <span class="price-num">250</span>
+                      </div>
+                      <div class="hero-slide-original-price">
+                        <del>Rs. 320</del>
+                      </div>
+                      <span class="hero-slide-discount-tag">SAVE 22%</span>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-hero-add" data-id="sm-04" data-offer-price="250" aria-label="Add Offer: Samyang Buldak &amp; Shin Ramyun Pack to Cart">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                      <span>Add Offer to Cart</span>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-hero-quickview" data-id="sm-04" data-offer-price="250">
+                      <span>Quick View</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="hero-slide-visual">
+                  <div class="hero-slide-img-box">
+                    <img src="assets/images/bestseller_ramen_collection.jpg" alt="Samyang Buldak &amp; Shin Ramyun Korean Ramen Multipack" fetchpriority="high">
+                    <div class="hero-slide-stock-badge offer-badge">🔥 22% OFF DEAL</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Offer Slide 1: Seoulmandu Signature Kimchi (Save Rs. 70) -->
+            <article class="hero-carousel-slide" data-slide-index="1" role="group" aria-roledescription="slide" aria-label="Offer 2 of 4: Seoulmandu Authentic Kimchi">
+              <div class="hero-slide-grid">
+                <div class="hero-slide-info">
+                  <div class="hero-slide-tag-row">
+                    <span class="hero-slide-cat">🥫 Sauces &amp; Condiments</span>
+                    <span class="badge-pill gold">🏷️ SAVE RS. 70 • HOUSE SPECIAL</span>
+                  </div>
+                  <h2 class="hero-slide-title">Seoulmandu Authentic Kimchi (500g)</h2>
+                  <div class="hero-slide-chips">
+                    <span class="slide-chip">🫙 500g Glass Jar</span>
+                    <span class="slide-chip">🌱 Handcrafted Fresh</span>
+                    <span class="slide-chip">🏷️ Save Rs. 70 Today</span>
+                  </div>
+                  <div class="hero-slide-actions-row">
+                    <div class="hero-slide-price-group">
+                      <div class="hero-slide-price">
+                        <span class="price-symbol">Rs.</span>
+                        <span class="price-num">380</span>
+                      </div>
+                      <div class="hero-slide-original-price">
+                        <del>Rs. 450</del>
+                      </div>
+                      <span class="hero-slide-discount-tag">SAVE 16%</span>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-hero-add" data-id="sm-kimchi" data-offer-price="380" aria-label="Add Offer: Authentic Kimchi to Cart">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                      <span>Add Offer to Cart</span>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-hero-quickview" data-id="sm-kimchi" data-offer-price="380">
+                      <span>Quick View</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="hero-slide-visual">
+                  <div class="hero-slide-img-box">
+                    <img src="assets/images/seoulmandu_signature_kimchi.jpg" alt="Seoulmandu Authentic Fermented Napa Cabbage Kimchi 500g Jar" loading="lazy">
+                    <div class="hero-slide-stock-badge offer-badge">🏷️ SAVE RS. 70</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Offer Slide 2: Bibigo Wang Mandu (19% OFF) -->
+            <article class="hero-carousel-slide" data-slide-index="2" role="group" aria-roledescription="slide" aria-label="Offer 3 of 4: Bibigo Wang Mandu">
+              <div class="hero-slide-grid">
+                <div class="hero-slide-info">
+                  <div class="hero-slide-tag-row">
+                    <span class="hero-slide-cat">🥟 Frozen Foods &amp; Dumplings</span>
+                    <span class="badge-pill red">⚡ 19% OFF • FAMILY DEAL</span>
+                  </div>
+                  <h2 class="hero-slide-title">Bibigo Wang Mandu (900g Family Pack)</h2>
+                  <div class="hero-slide-chips">
+                    <span class="slide-chip">🥟 900g Family Pack</span>
+                    <span class="slide-chip">🍳 Crispy Pan-Fry / Steamed</span>
+                    <span class="slide-chip">🏷️ Save Rs. 130</span>
+                  </div>
+                  <div class="hero-slide-actions-row">
+                    <div class="hero-slide-price-group">
+                      <div class="hero-slide-price">
+                        <span class="price-symbol">Rs.</span>
+                        <span class="price-num">550</span>
+                      </div>
+                      <div class="hero-slide-original-price">
+                        <del>Rs. 680</del>
+                      </div>
+                      <span class="hero-slide-discount-tag">SAVE 19%</span>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-hero-add" data-id="sm-01" data-offer-price="550" aria-label="Add Offer: Bibigo Wang Mandu to Cart">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                      <span>Add Offer to Cart</span>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-hero-quickview" data-id="sm-01" data-offer-price="550">
+                      <span>Quick View</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="hero-slide-visual">
+                  <div class="hero-slide-img-box">
+                    <img src="assets/images/frozen_bibigo_dumplings.jpg" alt="Bibigo Wang Mandu Korean Frozen Dumplings 900g" loading="lazy">
+                    <div class="hero-slide-stock-badge offer-badge">⚡ SAVE RS. 130</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Offer Slide 3: Korean Soju Collection (Save Rs. 70) -->
+            <article class="hero-carousel-slide" data-slide-index="3" role="group" aria-roledescription="slide" aria-label="Offer 4 of 4: Korean Soju Collection">
+              <div class="hero-slide-grid">
+                <div class="hero-slide-info">
+                  <div class="hero-slide-tag-row">
+                    <span class="hero-slide-cat">🥤 Drinks &amp; Beverages</span>
+                    <span class="badge-pill gold">🎁 COMBO OFFER • SAVE RS. 70</span>
+                  </div>
+                  <h2 class="hero-slide-title">Authentic Korean Soju Collection</h2>
+                  <div class="hero-slide-chips">
+                    <span class="slide-chip">🍶 Chamisul &amp; Jinro Original</span>
+                    <span class="slide-chip">🍑 Peach Fruit Soju</span>
+                    <span class="slide-chip">🏷️ Save Rs. 70 Bundle</span>
+                  </div>
+                  <div class="hero-slide-actions-row">
+                    <div class="hero-slide-price-group">
+                      <div class="hero-slide-price">
+                        <span class="price-symbol">Rs.</span>
+                        <span class="price-num">450</span>
+                      </div>
+                      <div class="hero-slide-original-price">
+                        <del>Rs. 520</del>
+                      </div>
+                      <span class="hero-slide-discount-tag">SAVE 13%</span>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-hero-add" data-id="sm-07" data-offer-price="450" aria-label="Add Offer: Korean Soju to Cart">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                      <span>Add Offer to Cart</span>
+                    </button>
+                    <button type="button" class="btn btn-outline btn-hero-quickview" data-id="sm-07" data-offer-price="450">
+                      <span>Quick View</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="hero-slide-visual">
+                  <div class="hero-slide-img-box">
+                    <img src="assets/images/bestseller_korean_drinks.jpg" alt="Authentic Korean Soju Chamisul and Good Day Bottles" loading="lazy">
+                    <div class="hero-slide-stock-badge offer-badge">🎁 COMBO OFFER</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Carousel Bottom Bar (Tabs / Indicators & Auto-Play Controls) -->
+          <div class="hero-carousel-footer">
+            <div class="carousel-indicators" role="tablist" aria-label="Special Offers selection">
+              <button type="button" class="carousel-tab active" data-slide-target="0" role="tab" aria-selected="true" aria-label="Go to offer 1: 22% OFF Buldak Pack">
+                <span class="tab-index">01</span>
+                <span class="tab-title">22% OFF Buldak</span>
+                <span class="tab-progress"></span>
+              </button>
+              <button type="button" class="carousel-tab" data-slide-target="1" role="tab" aria-selected="false" aria-label="Go to offer 2: Kimchi Deal">
+                <span class="tab-index">02</span>
+                <span class="tab-title">Kimchi Deal</span>
+                <span class="tab-progress"></span>
+              </button>
+              <button type="button" class="carousel-tab" data-slide-target="2" role="tab" aria-selected="false" aria-label="Go to offer 3: 19% OFF Mandu">
+                <span class="tab-index">03</span>
+                <span class="tab-title">19% OFF Mandu</span>
+                <span class="tab-progress"></span>
+              </button>
+              <button type="button" class="carousel-tab" data-slide-target="3" role="tab" aria-selected="false" aria-label="Go to offer 4: Soju Offer">
+                <span class="tab-index">04</span>
+                <span class="tab-title">Soju Offer</span>
+                <span class="tab-progress"></span>
+              </button>
+            </div>
+
+            <button type="button" class="carousel-autoplay-btn" id="carouselAutoplayToggle" aria-label="Pause slideshow auto play" title="Pause / Play Slideshow">
+              <span id="carouselAutoplayIcon">⏸</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Hero Bottom Action Strip (E-Commerce Shortcut Links) -->
+        <div class="hero-action-strip">
+          <a href="#menu" class="hero-strip-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span>Browse All Mart Products</span>
+            <span class="strip-arrow">→</span>
+          </a>
+          <a href="#featured" class="hero-strip-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Popular Bestsellers</span>
+            <span class="strip-arrow">→</span>
+          </a>
+          <a href="#location" class="hero-strip-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Dharan Store &amp; Hours</span>
+            <span class="strip-arrow">→</span>
           </a>
         </div>
 
@@ -237,7 +520,88 @@
     </div>
 
     <!-- =========================================================================
-         3. BRAND INTRODUCTION (EDITORIAL ASYMMETRIC STORY)
+         3. PRODUCTS CATALOG (FILTERABLE & SEARCHABLE)
+         ========================================================================= -->
+    <section class="section-padding section-menu" id="menu">
+      <div class="container">
+        <!-- Section Heading -->
+        <div class="section-header-row">
+          <div>
+            <span class="section-label red">
+              <span class="korean-sub">인기 품목</span> KOREAN GROCERY &amp; SNACKS
+            </span>
+            <h2 class="section-title light">PRODUCTS</h2>
+            <p class="section-subtitle">
+              Discover your Seoulmandu favorites. Original packaged Korean goods and essentials.
+            </p>
+          </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="menu-filter-container">
+          <!-- Category Pills with Horizontal Scroll Controls -->
+          <div class="menu-filter-bar-wrapper">
+            <button type="button" class="filter-scroll-btn filter-scroll-prev" id="filterScrollPrev" aria-label="Scroll categories left">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <div class="menu-filter-bar" id="menuFilterBar" role="tablist">
+              <button class="filter-btn active" data-category="all">All Products</button>
+              <button class="filter-btn" data-category="ramen">Instant Noodles &amp; Ramen</button>
+              <button class="filter-btn" data-category="snacks">Snacks &amp; Chips</button>
+              <button class="filter-btn" data-category="sweets">Candies &amp; Chocolates</button>
+              <button class="filter-btn" data-category="drinks">Drinks &amp; Beverages</button>
+              <button class="filter-btn" data-category="sauces">Sauces &amp; Condiments</button>
+              <button class="filter-btn" data-category="frozen">Frozen Foods &amp; Dumplings</button>
+            </div>
+
+            <button type="button" class="filter-scroll-btn filter-scroll-next" id="filterScrollNext" aria-label="Scroll categories right">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Active Filter Status Indicator -->
+          <div class="active-filter-indicator" id="activeFilterBanner" style="display: none;">
+            <span class="active-filter-text" id="activeFilterText">Showing: All Products</span>
+            <button type="button" class="btn-clear-filter" id="btnClearCategoryFilter" aria-label="Clear active category filter">
+              <span>✕ Clear Filter</span>
+            </button>
+          </div>
+
+          <!-- Search & Dietary Bar -->
+          <div class="menu-controls-row">
+            <div class="menu-search-box">
+              <svg class="menu-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" class="menu-search-input" placeholder="Search ramyun, dumplings, snacks, drinks..."
+                aria-label="Search products">
+            </div>
+
+            <div class="menu-dietary-pills">
+              <button class="toggle-chip toggle-chip-veg" id="vegFilterToggle">
+                <span>🌱</span>
+                <span>Vegetarian Friendly Only</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Food Cards Grid (Dynamic JS Rendered) -->
+        <div class="menu-cards-grid" id="menuGrid">
+          <!-- Populated by assets/js/main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. BRAND INTRODUCTION (EDITORIAL ASYMMETRIC STORY)
          ========================================================================= -->
     <section class="section-padding section-intro" id="about">
       <div class="container">
@@ -354,181 +718,138 @@
 
 
     <!-- =========================================================================
-         5. FEATURED / BESTSELLERS (MAGAZINE SPOTLIGHT)
+         5. FEATURED / BESTSELLERS (BALANCED PRODUCT GRID)
          ========================================================================= -->
     <section class="section-padding section-featured" id="featured">
       <div class="container">
         <div class="section-header-row">
           <div>
             <span class="section-label red">
-              <span class="korean-sub">대표 인기 메뉴</span> BESTSELLERS
+              <span class="korean-sub">대표 인기 품목</span> BESTSELLERS
             </span>
-            <h2 class="section-title light">THE SEOULMANDU FAVORITES</h2>
+            <h2 class="section-title light">POPULAR KOREAN FAVORITES</h2>
+            <p class="section-subtitle">
+              Authentic packaged imports loved by our Dharan community.
+            </p>
           </div>
           <a href="#menu" class="btn btn-outline btn-sm">
-            <span>View All Items</span>
+            <span>Explore Full Catalog</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
           </a>
         </div>
 
-        <div class="featured-layout">
-          <!-- Main Hero Dish Card (Larger) -->
-          <article class="featured-hero-card">
-            <div class="hero-card-img-wrap">
-              <img src="assets/images/bestseller_ramen_collection.jpg" alt="Korean Instant Noodles &amp; Viral Ramen: Shin Ramyun, Buldak, Jin Ramen"
-                loading="lazy">
-              <div class="hero-card-overlay-badge">
-                <span class="badge-pill red">#01 BESTSELLER</span>
-                <span class="badge-pill gold">ORIGINAL IMPORT</span>
+        <div class="bestseller-grid">
+          <!-- Bestseller 1: Samyang Buldak & Shin Ramyun Pack -->
+          <article class="bestseller-card" data-id="sm-04">
+            <div class="bestseller-img-wrap">
+              <img src="assets/images/bestseller_ramen_collection.jpg" alt="Samyang Buldak & Shin Ramyun Pack" loading="lazy">
+              <div class="bestseller-badge-wrap">
+                <span class="badge-pill red">Bestseller</span>
               </div>
-              <div class="hero-card-price-tag">Rs. 250</div>
             </div>
-
-            <div class="hero-card-body">
-              <div class="hero-card-meta">
-                <span class="korean-sub">한국 라면 (Korean Ramyun)</span>
-                <span>VIRAL FAVORITES • INSTANT NOODLES</span>
+            <div class="bestseller-card-body">
+              <div class="bestseller-card-meta">
+                <span class="bestseller-cat-tag">Instant Noodles &amp; Ramen</span>
               </div>
-              <h3 class="hero-card-title">Instant Noodles &amp; Viral Korean Ramen</h3>
-
-              <div class="hero-card-highlights">
-                <span class="highlight-chip">🍜 Fiery Buldak &amp; Savory Shin</span>
-                <span class="highlight-chip">🔥 Instant Hot Broth &amp; Stir-Fry</span>
-                <span class="highlight-chip">🇰🇷 100% Authentic Korean Imports</span>
-              </div>
-
-              <div class="hero-card-footer">
-                <span style="font-size: 0.82rem; color: var(--color-accent-sage);">Ordered over 3,400+ packs this
-                  month</span>
-                <button class="btn btn-primary btn-sm btn-featured-add" data-id="sm-04">
+              <h3 class="bestseller-card-title">Samyang Buldak &amp; Shin Ramyun Pack</h3>
+              <div class="bestseller-card-footer">
+                <span class="bestseller-card-price">Rs. 320</span>
+                <button class="btn btn-primary btn-sm btn-featured-add" data-id="sm-04" aria-label="Add Samyang Buldak & Shin Ramyun Pack to Cart">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
-                  Add to Cart
+                  <span>Add to Cart</span>
                 </button>
               </div>
             </div>
           </article>
 
-          <!-- Stacked Side Companion Cards -->
-          <div class="featured-side-stack">
-            <!-- Item 2: Frozen Foods & Mandu -->
-            <article class="side-card">
-              <div class="side-card-img-wrap">
-                <img src="assets/images/bestseller_frozen_foods.jpg" alt="Bibigo Mandu Dumplings &amp; Frozen Korean Snacks" loading="lazy">
+          <!-- Bestseller 2: Bibigo Wang Mandu -->
+          <article class="bestseller-card" data-id="sm-01">
+            <div class="bestseller-img-wrap">
+              <img src="assets/images/frozen_bibigo_dumplings.jpg" alt="Bibigo Wang Mandu Dumplings" loading="lazy">
+              <div class="bestseller-badge-wrap">
+                <span class="badge-pill red">Bestseller</span>
               </div>
-              <div class="side-card-body">
-                <div>
-                  <div class="side-card-badge">FROZEN FAVORITES &amp; MANDU</div>
-                  <h4 class="side-card-title">Bibigo Mandu &amp; Frozen Delights</h4>
-                </div>
-                <div class="side-card-footer">
-                  <span class="side-card-price">Rs. 650</span>
-                  <button class="btn-mini-add btn-featured-add" data-id="sm-01">+ Add</button>
-                </div>
+            </div>
+            <div class="bestseller-card-body">
+              <div class="bestseller-card-meta">
+                <span class="bestseller-cat-tag">Frozen Foods &amp; Dumplings</span>
               </div>
-            </article>
+              <h3 class="bestseller-card-title">Bibigo Wang Mandu</h3>
+              <div class="bestseller-card-footer">
+                <span class="bestseller-card-price">Rs. 680</span>
+                <button class="btn btn-primary btn-sm btn-featured-add" data-id="sm-01" aria-label="Add Bibigo Wang Mandu to Cart">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  <span>Add to Cart</span>
+                </button>
+              </div>
+            </div>
+          </article>
 
-            <!-- Item 3: Roasted Seaweed -->
-            <article class="side-card">
-              <div class="side-card-img-wrap">
-                <img src="assets/images/bestseller_roasted_seaweed.jpg" alt="Premium Roasted Seaweed Laver &amp; Flakes" loading="lazy">
+          <!-- Bestseller 3: Seoulmandu Authentic Kimchi -->
+          <article class="bestseller-card" data-id="sm-kimchi">
+            <div class="bestseller-img-wrap">
+              <img src="assets/images/seoulmandu_signature_kimchi.jpg" alt="Seoulmandu Authentic Kimchi" loading="lazy">
+              <div class="bestseller-badge-wrap">
+                <span class="badge-pill gold">Signature</span>
               </div>
-              <div class="side-card-body">
-                <div>
-                  <div class="side-card-badge">CRISPY PANTRY ESSENTIAL</div>
-                  <h4 class="side-card-title">Premium Roasted Seaweed &amp; Laver</h4>
-                </div>
-                <div class="side-card-footer">
-                  <span class="side-card-price">Rs. 220</span>
-                  <button class="btn-mini-add btn-featured-add" data-id="sm-06">+ Add</button>
-                </div>
+            </div>
+            <div class="bestseller-card-body">
+              <div class="bestseller-card-meta">
+                <span class="bestseller-cat-tag">Sauces &amp; Condiments</span>
               </div>
-            </article>
+              <h3 class="bestseller-card-title">Seoulmandu Authentic Kimchi</h3>
+              <div class="bestseller-card-footer">
+                <span class="bestseller-card-price">Rs. 450</span>
+                <button class="btn btn-primary btn-sm btn-featured-add" data-id="sm-kimchi" aria-label="Add Seoulmandu Authentic Kimchi to Cart">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  <span>Add to Cart</span>
+                </button>
+              </div>
+            </div>
+          </article>
 
-            <!-- Item 4: Korean Soju & Drinks -->
-            <article class="side-card">
-              <div class="side-card-img-wrap">
-                <img src="assets/images/bestseller_korean_drinks.jpg" alt="Authentic Korean Soju &amp; Refreshing Drinks" loading="lazy">
+          <!-- Bestseller 4: Yopokki Cheese Tteokbokki -->
+          <article class="bestseller-card" data-id="sm-03">
+            <div class="bestseller-img-wrap">
+              <img src="assets/images/packaged_cheese_tteokbokki.jpg" alt="Yopokki Cheese Tteokbokki" loading="lazy">
+              <div class="bestseller-badge-wrap">
+                <span class="badge-pill gold">Favorite</span>
               </div>
-              <div class="side-card-body">
-                <div>
-                  <div class="side-card-badge">CHILLED BEVERAGES &amp; SOJU</div>
-                  <h4 class="side-card-title">Authentic Korean Soju &amp; Drinks</h4>
-                </div>
-                <div class="side-card-footer">
-                  <span class="side-card-price">Rs. 450</span>
-                  <button class="btn-mini-add btn-featured-add" data-id="sm-07">+ Add</button>
-                </div>
+            </div>
+            <div class="bestseller-card-body">
+              <div class="bestseller-card-meta">
+                <span class="bestseller-cat-tag">Snacks &amp; Chips</span>
               </div>
-            </article>
-          </div>
+              <h3 class="bestseller-card-title">Yopokki Cheese Tteokbokki</h3>
+              <div class="bestseller-card-footer">
+                <span class="bestseller-card-price">Rs. 380</span>
+                <button class="btn btn-primary btn-sm btn-featured-add" data-id="sm-03" aria-label="Add Yopokki Cheese Tteokbokki to Cart">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  <span>Add to Cart</span>
+                </button>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- =========================================================================
-         6. SIGNATURE MENU SECTION (FILTERABLE & SEARCHABLE)
-         ========================================================================= -->
-    <section class="section-padding section-menu" id="menu">
-      <div class="container">
-        <!-- Section Heading -->
-        <div class="section-header-row">
-          <div>
-            <span class="section-label red">
-              <span class="korean-sub">인기 품목</span> KOREAN GROCERY &amp; SNACKS
-            </span>
-            <h2 class="section-title light">ITEMS</h2>
-            <p style="color: var(--color-text-gray-light); font-size: 1.05rem;">
-              Discover your Seoulmandu favorites. Original packaged Korean goods and essentials.
-            </p>
-          </div>
-        </div>
-
-        <!-- Filter & Search Controls -->
-        <div class="menu-filter-container">
-          <!-- Category Pills -->
-          <div class="menu-filter-bar" role="tablist">
-            <button class="filter-btn active" data-category="all">All Items</button>
-            <button class="filter-btn" data-category="mandu">Frozen &amp; Mandu (냉동식품)</button>
-            <button class="filter-btn" data-category="street">Ramen &amp; Snacks (라면/스낵)</button>
-            <button class="filter-btn" data-category="rice">Pantry &amp; Grocery (식료품)</button>
-            <button class="filter-btn" data-category="drinks">Drinks &amp; Sweets (음료/과자)</button>
-          </div>
-
-          <!-- Search & Dietary Bar -->
-          <div class="menu-controls-row">
-            <div class="menu-search-box">
-              <svg class="menu-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              <input type="text" class="menu-search-input" placeholder="Search ramyun, dumplings, snacks, drinks..."
-                aria-label="Search items">
-            </div>
-
-            <div class="menu-dietary-pills">
-              <button class="toggle-chip toggle-chip-veg" id="vegFilterToggle">
-                <span>🌱</span>
-                <span>Vegetarian Friendly Only</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Food Cards Grid (Dynamic JS Rendered) -->
-        <div class="menu-cards-grid" id="menuGrid">
-          <!-- Populated by assets/js/main.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         7. SEOUL × DHARAN (SPLIT-SCREEN STORYTELLING)
+         6. SEOUL × DHARAN (SPLIT-SCREEN STORYTELLING)
          ========================================================================= -->
     <section class="section-seoul-ktm" id="seoul-ktm">
       <div class="container">
@@ -548,12 +869,14 @@
           <!-- Center Connector Bridge Badge -->
           <div class="split-center-bridge" aria-hidden="true">
             <div class="bridge-circle">
-              <svg class="bridge-arrow-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <svg class="bridge-arrow-icon" width="34" height="34" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </div>
-            <div class="bridge-banner">SEOUL <span class="bridge-arrow-desktop">→</span><span class="bridge-arrow-mobile">↓</span> DHARAN</div>
+            <div class="bridge-banner">SEOUL <span class="bridge-arrow-desktop">→</span><span
+                class="bridge-arrow-mobile">↓</span> DHARAN</div>
           </div>
 
           <!-- Right: Dharan -->
@@ -573,7 +896,8 @@
         <div class="story-bridge-footer">
           <h3>Two Cities. One Authentic Korean Mart Experience.</h3>
           <p>
-            Seoulmandu brings authentic Korean mart culture straight to Dharan—curating viral instant ramyun, premium kimchi, frozen dumplings, and pantry staples imported directly from Seoul to your kitchen.
+            Seoulmandu brings authentic Korean mart culture straight to Dharan—curating viral instant ramyun, premium
+            kimchi, frozen dumplings, and pantry staples imported directly from Seoul to your kitchen.
           </p>
         </div>
       </div>
@@ -604,8 +928,8 @@
               alt="Korea Unpacked: Packaged Korean snack flatlay spread with Market O brownies, Maxim coffee, and treats"
               loading="lazy">
             <div class="exp-caption">
-              <h5>KOREA, UNPACKED.</h5>
-              <p>Minimal, premium, and directly connected to packaged Korean products.</p>
+              <h5>KOREAN SWEETS &amp; CONFECTIONERY</h5>
+              <p>Classic Market O real brownies, chocolate pies, sweet biscuits, and Maxim coffee.</p>
             </div>
           </div>
 
@@ -615,8 +939,8 @@
               alt="All Things Korean: Aisle shelves stocked with Korean ramyun packs and HBAF honey butter almonds"
               loading="lazy">
             <div class="exp-caption">
-              <h5>ALL THINGS KOREAN. ALL IN ONE PLACE.</h5>
-              <p>Best for communicating a wide variety of products.</p>
+              <h5>AISLE BY AISLE: SNACKS &amp; RAMYUN</h5>
+              <p>Shelves stocked with fiery Buldak, savory Shin, and viral HBAF honey butter almonds.</p>
             </div>
           </div>
 
@@ -626,8 +950,8 @@
               alt="Your Korean Cravings Covered: Korean market tote bag filled with Buldak, Yopokki, Bibigo, and snacks"
               loading="lazy">
             <div class="exp-caption">
-              <h5>YOUR KOREAN CRAVINGS, COVERED.</h5>
-              <p>Friendly, contemporary, and easy to remember.</p>
+              <h5>EVERYDAY GROCERY BASKET</h5>
+              <p>Pick up your favorite instant rice cakes, cooking pastes, and pantry staples in Dharan.</p>
             </div>
           </div>
 
@@ -637,8 +961,8 @@
               alt="From Seoul to Dharan with Flavor: Customer shopping along authentic Korean mart shelves and drink coolers"
               loading="lazy">
             <div class="exp-caption">
-              <h5>FROM SEOUL TO DHARAN, WITH FLAVOR.</h5>
-              <p>Strong location identity with a premium, international feel.</p>
+              <h5>DIRECT FROM SEOUL TO DHARAN</h5>
+              <p>Authentic imported Korean mart goods, chilled beverages, and convenience drinks.</p>
             </div>
           </div>
 
@@ -648,8 +972,8 @@
               alt="Discover Korea One Pack at a Time: Extensive display of authentic Korean cup noodles and bowl ramen"
               loading="lazy">
             <div class="exp-caption">
-              <h5>DISCOVER KOREA. ONE PACK AT A TIME.</h5>
-              <p>Distinctive and particularly suitable for a mart specializing in packaged foods.</p>
+              <h5>THE INSTANT RAMYUN WALL</h5>
+              <p>Explore Korea's most popular cup noodles, bowl ramen, and spicy stir-fry favorites.</p>
             </div>
           </div>
         </div>
@@ -699,72 +1023,64 @@
         <div class="ig-grid">
           <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
             class="ig-card">
-            <img src="assets/images/discover_korea_ramen_wall.jpg" alt="Authentic Korean instant ramen wall shelves" loading="lazy">
+            <img src="assets/images/discover_korea_ramen_wall.jpg" alt="Authentic Korean instant ramen wall shelves"
+              loading="lazy">
             <div class="ig-overlay">
-              <div class="ig-stats-row">
-                <span>❤️ 2.8k</span>
-                <span>💬 142</span>
-              </div>
-              <p class="ig-caption-sneak">Seoulmandu's massive wall of authentic Korean instant ramyun! 🍜🔥 #RamenHaul</p>
+              <span class="ig-tag-badge">Instagram ↗</span>
+              <p class="ig-caption-sneak">Seoulmandu's massive wall of authentic Korean instant ramyun! 🍜🔥 #RamenHaul
+              </p>
             </div>
           </a>
 
           <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
             class="ig-card">
-            <img src="assets/images/seoulmandu_signature_kimchi.jpg" alt="Seoulmandu authentic kimchi jar" loading="lazy">
+            <img src="assets/images/seoulmandu_signature_kimchi.jpg" alt="Seoulmandu authentic kimchi jar"
+              loading="lazy">
             <div class="ig-overlay">
-              <div class="ig-stats-row">
-                <span>❤️ 3.2k</span>
-                <span>💬 198</span>
-              </div>
-              <p class="ig-caption-sneak">Fresh batch of crunchy, authentic Korean Kimchi jars restocked 🥬❤️ #KimchiLove</p>
+              <span class="ig-tag-badge">Instagram ↗</span>
+              <p class="ig-caption-sneak">Fresh batch of crunchy, authentic Korean Kimchi jars restocked 🥬❤️
+                #KimchiLove</p>
             </div>
           </a>
 
           <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
             class="ig-card">
-            <img src="assets/images/bestseller_frozen_foods.jpg" alt="Frozen Korean mart dumplings and specialties" loading="lazy">
+            <img src="assets/images/bestseller_frozen_foods.jpg" alt="Frozen Korean mart dumplings and specialties"
+              loading="lazy">
             <div class="ig-overlay">
-              <div class="ig-stats-row">
-                <span>❤️ 2.4k</span>
-                <span>💬 115</span>
-              </div>
-              <p class="ig-caption-sneak">Stock your freezer with authentic Bibigo dumplings & Korean frozen treats 🥟❄️</p>
+              <span class="ig-tag-badge">Instagram ↗</span>
+              <p class="ig-caption-sneak">Stock your freezer with authentic Bibigo dumplings & Korean frozen treats 🥟❄️
+              </p>
             </div>
           </a>
 
           <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
             class="ig-card">
-            <img src="assets/images/bestseller_korean_drinks.jpg" alt="Chilled Korean mart canned drinks and beverages" loading="lazy">
+            <img src="assets/images/bestseller_korean_drinks.jpg" alt="Chilled Korean mart canned drinks and beverages"
+              loading="lazy">
             <div class="ig-overlay">
-              <div class="ig-stats-row">
-                <span>❤️ 2.1k</span>
-                <span>💬 94</span>
-              </div>
-              <p class="ig-caption-sneak">Chilled Milkis, Sac Sac & Bong Bong grape drinks ready in store 🍇🧊 #KoreanDrinks</p>
+              <span class="ig-tag-badge">Instagram ↗</span>
+              <p class="ig-caption-sneak">Chilled Milkis, Sac Sac & Bong Bong grape drinks ready in store 🍇🧊
+                #KoreanDrinks</p>
             </div>
           </a>
 
           <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
             class="ig-card">
-            <img src="assets/images/bestseller_roasted_seaweed.jpg" alt="Korean seasoned roasted seaweed snack packs" loading="lazy">
+            <img src="assets/images/bestseller_roasted_seaweed.jpg" alt="Korean seasoned roasted seaweed snack packs"
+              loading="lazy">
             <div class="ig-overlay">
-              <div class="ig-stats-row">
-                <span>❤️ 1.9k</span>
-                <span>💬 86</span>
-              </div>
+              <span class="ig-tag-badge">Instagram ↗</span>
               <p class="ig-caption-sneak">Crispy roasted Korean seaweed packs for your everyday snack fix 🍙✨</p>
             </div>
           </a>
 
           <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
             class="ig-card">
-            <img src="assets/images/korean_cravings_tote.jpg" alt="Korean mart shopping tote haul with snacks and noodles" loading="lazy">
+            <img src="assets/images/korean_cravings_tote.jpg"
+              alt="Korean mart shopping tote haul with snacks and noodles" loading="lazy">
             <div class="ig-overlay">
-              <div class="ig-stats-row">
-                <span>❤️ 2.6k</span>
-                <span>💬 130</span>
-              </div>
+              <span class="ig-tag-badge">Instagram ↗</span>
               <p class="ig-caption-sneak">Weekend grocery bag full of Korean mart snacks, sweets and treats! 🛍️🇰🇷</p>
             </div>
           </a>
@@ -777,37 +1093,34 @@
          ========================================================================= -->
     <section class="section-padding section-cta" id="order-cta">
       <div class="container">
-        <div class="flex flex-col items-center justify-center min-h-[420px] bg-[#121214] text-white text-center px-6 py-12 rounded-2xl border border-neutral-800">
-          <!-- Top Tag -->
-          <span class="text-xs uppercase tracking-wider text-amber-200/80 bg-neutral-900/80 px-4 py-1 rounded-full border border-neutral-700/50 mb-6">
-            지금 쇼핑하기 | IN-STORE & HOME DELIVERY IN DHARAN
+        <div class="cta-inner-card">
+          <div class="cta-glow-element" aria-hidden="true"></div>
+          <span class="section-label red" style="margin-bottom: 20px;">
+            <span class="korean-sub">지금 주문하기</span> IN-STORE &amp; LOCAL DELIVERY
           </span>
-
-          <!-- Main Title -->
-          <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-4 text-white">
-            CRAVING AUTHENTIC K-FLAVORS?
-          </h1>
-
-          <!-- Subtitle -->
-          <p class="max-w-xl text-neutral-400 text-sm md:text-base leading-relaxed mb-8">
-            Your favorite Korean grocery essentials are right here in Dharan. Handcrafted kimchi, instant ramen, premium sauces, and imported snacks delivered right to your doorstep.
+          <h2 class="cta-heading">YOUR KOREAN MART IN DHARAN</h2>
+          <p class="cta-subtext">
+            Stock your pantry with authentic Korean instant ramyun, Bibigo dumplings, fresh kimchi, sauces, and snacks.
+            Easy store pickup or local home delivery across Dharan.
           </p>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-wrap gap-4 justify-center items-center mb-10">
-            <button class="bg-amber-400 text-neutral-950 font-semibold px-6 py-3 rounded-full hover:bg-amber-300 shadow-lg shadow-amber-500/20 transition" onclick="document.querySelector('#cartOpenBtn').click()">
-              🛒 SHOP GROCERIES NOW
-            </button>
-            <button class="border border-neutral-700 hover:border-neutral-500 text-neutral-200 font-semibold px-6 py-3 rounded-full bg-neutral-900/60 transition" onclick="document.querySelector('#menu').scrollIntoView({behavior: 'smooth'})">
-              VIEW PRODUCT CATALOG
+          <div class="cta-buttons-wrap">
+            <a href="#menu" class="btn btn-primary">
+              <span>Browse All Products</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <button class="btn btn-outline" onclick="document.querySelector('#cartOpenBtn').click()">
+              <span>View Cart &amp; Order</span>
             </button>
           </div>
-
-          <!-- Delivery Partners / Location -->
-          <div class="flex flex-wrap items-center justify-center gap-3 text-xs text-neutral-400">
-            <span>AVAILABLE ACROSS DHARAN:</span>
-            <span class="bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800 text-neutral-300">🛵 FAST HOME DELIVERY</span>
-            <span class="bg-neutral-900 px-3 py-1 rounded-full border border-neutral-800 text-neutral-300">📍 DHARAN STORE PICKUP</span>
+          <div class="cta-delivery-partners">
+            <span>Service across Dharan:</span>
+            <div class="partner-pills">
+              <span class="partner-badge">🛵 Local Home Delivery</span>
+              <span class="partner-badge">📍 Dharan Mart Pickup</span>
+            </div>
           </div>
         </div>
       </div>
@@ -880,8 +1193,8 @@
 
             <!-- Action buttons -->
             <div class="location-actions-row">
-              <a href="https://www.google.com/maps?q=26%C2%B048'44.1%22N+87%C2%B016'42.4%22E" target="_blank" rel="noopener noreferrer"
-                class="btn btn-primary btn-sm">
+              <a href="https://www.google.com/maps?q=26%C2%B048'44.1%22N+87%C2%B016'42.4%22E" target="_blank"
+                rel="noopener noreferrer" class="btn btn-primary btn-sm">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
                 </svg>
@@ -896,8 +1209,8 @@
           <!-- Visual & Live Interactive Map Card -->
           <div class="location-map-wrap">
             <iframe class="location-map-iframe"
-              src="https://maps.google.com/maps?q=26.81225,87.278444&hl=en&z=17&output=embed"
-              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=26.81225,87.278444&hl=en&z=17&output=embed" allowfullscreen=""
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               title="Seoulmandu Korean Mart Dharan Location Map">
             </iframe>
 
@@ -938,8 +1251,9 @@
                 ★★★★★
               </div>
               <p class="review-text">
-                "Seoulmandu completely redefined Korean food in Dharan! The lace-skirt Gun-Mandu is easily the best
-                dumpling experience in Nepal, the crunch is unreal, and the dipping sauce hits all the right notes."
+                "So glad we finally have a genuine Korean grocery mart right here in Dharan! I used to order my Shin
+                Ramyun and Buldak multipacks all the way from Kathmandu. Having authentic Bibigo dumplings and pantry
+                goods locally is fantastic."
               </p>
             </div>
             <div>
@@ -947,11 +1261,11 @@
                 <div class="review-avatar">AS</div>
                 <div class="review-user-info">
                   <h5>Aarav Shrestha</h5>
-                  <p>Food Blogger @aarav_eats_drn</p>
+                  <p>Regular Customer, Dharan</p>
                 </div>
               </div>
               <div class="review-fav-dish">
-                <span>Ordered:</span> <strong>Lace-Skirt Gun-Mandu</strong>
+                <span>Favorite:</span> <strong>Bibigo Wang Mandu (900g)</strong>
               </div>
             </div>
           </div>
@@ -963,8 +1277,8 @@
                 ★★★★★
               </div>
               <p class="review-text">
-                "Finally, authentic Tteokbokki that doesn't hold back on flavor! The cheese pull is legendary and the
-                vibe makes you feel like you stepped into a chic Hongdae gastropub right here in Dharan."
+                "The fresh kimchi jar is crunchy, flavorful, and fermented just right. I always grab roasted seaweed
+                packs and chilled Milkis cans whenever I drop by Bhanuchowk. Essential spot for Korean food lovers."
               </p>
             </div>
             <div>
@@ -972,11 +1286,11 @@
                 <div class="review-avatar" style="background: linear-gradient(135deg, #7D8D72, #48BB78);">PG</div>
                 <div class="review-user-info">
                   <h5>Pooja Gurung</h5>
-                  <p>Regular Customer Dharan</p>
+                  <p>Bhanuchowk, Dharan</p>
                 </div>
               </div>
               <div class="review-fav-dish">
-                <span>Ordered:</span> <strong>Melted Cheese Tteokbokki</strong>
+                <span>Favorite:</span> <strong>Seoulmandu Authentic Kimchi (500g)</strong>
               </div>
             </div>
           </div>
@@ -988,8 +1302,8 @@
                 ★★★★★
               </div>
               <p class="review-text">
-                "The steamed bamboo mandu took me right back to the alleyways of Myeongdong. Delicate, juicy, and so
-                fresh. Can't stop ordering for our weekend studio lunches!"
+                "The instant Yopokki cheese rice cake kits are delicious and take literally two minutes to prepare on
+                the stove. Super convenient with authentic Korean flavor. Great selection of snacks and cooking sauces."
               </p>
             </div>
             <div>
@@ -998,11 +1312,11 @@
                   style="background: linear-gradient(135deg, #E5A952, #C28227); color: #0D0E11;">RM</div>
                 <div class="review-user-info">
                   <h5>Rohan Manandhar</h5>
-                  <p>Culinary Enthusiast</p>
+                  <p>Dharan-8</p>
                 </div>
               </div>
               <div class="review-fav-dish">
-                <span>Ordered:</span> <strong>Classic Steamed Mandu</strong>
+                <span>Favorite:</span> <strong>Yopokki Cheese Tteokbokki Kit</strong>
               </div>
             </div>
           </div>
@@ -1014,8 +1328,8 @@
                 ★★★★★
               </div>
               <p class="review-text">
-                "The Yangnyeom fried chicken and strawberry ade are an absolute 10/10. Aesthetic packaging, fiery
-                flavors, and such a vibrant energy. Seoulmandu is officially our go-to hangout spot."
+                "Placed my cart order via WhatsApp and had our ramen haul and frozen snacks delivered to our home in
+                Dharan within an hour. Clean packaging and super responsive support desk."
               </p>
             </div>
             <div>
@@ -1024,11 +1338,11 @@
                   style="background: linear-gradient(135deg, #9F7AEA, #E5A952); color: #FFFFFF;">ST</div>
                 <div class="review-user-info">
                   <h5>Sneha Thapa</h5>
-                  <p>Content Creator @sneha.explores</p>
+                  <p>Local Shopper, Dharan</p>
                 </div>
               </div>
               <div class="review-fav-dish">
-                <span>Ordered:</span> <strong>Yangnyeom Fried Chicken</strong>
+                <span>Favorite:</span> <strong>Samyang Buldak &amp; Shin Ramyun Multipack</strong>
               </div>
             </div>
           </div>
@@ -1053,7 +1367,7 @@
                     <path
                       d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
                   </svg></span>mandu</span>
-              <span class="brand-sub">KOREAN MART DRN</span>
+              <span class="brand-sub">KOREAN MART</span>
             </div>
           </a>
           <p class="footer-brand-bio">
@@ -1088,9 +1402,9 @@
           <h4 class="footer-col-title">Navigation</h4>
           <ul class="footer-nav-list">
             <li><a href="#hero">Home</a></li>
-            <li><a href="#about">Our Story</a></li>
+            <li><a href="#menu">Products</a></li>
             <li><a href="#featured">Bestsellers</a></li>
-            <li><a href="#menu">Items</a></li>
+            <li><a href="#about">Our Story</a></li>
             <li><a href="#seoul-ktm">Seoul × Dharan</a></li>
             <li><a href="#experience">Visual Experience</a></li>
             <li><a href="privacypolicy.html">Privacy Policy</a></li>
@@ -1103,7 +1417,9 @@
           <h4 class="footer-col-title">Hours & Contact</h4>
           <ul class="footer-nav-list">
             <li><span style="color: #FFFFFF; font-weight: 600;">Sun to Sat:</span> 10:00 AM to 9:30 PM</li>
-            <li><span style="color: #FFFFFF; font-weight: 600;">Location:</span> Dharan, Nepal (<a href="https://www.google.com/maps?q=26%C2%B048'44.1%22N+87%C2%B016'42.4%22E" target="_blank" style="color: var(--color-accent-gold); text-decoration: underline;">26°48'44.1"N 87°16'42.4"E</a>)</li>
+            <li><span style="color: #FFFFFF; font-weight: 600;">Location:</span> Dharan, Nepal (<a
+                href="https://www.google.com/maps?q=26%C2%B048'44.1%22N+87%C2%B016'42.4%22E" target="_blank"
+                style="color: var(--color-accent-gold); text-decoration: underline;">26°48'44.1"N 87°16'42.4"E</a>)</li>
             <li><span style="color: #FFFFFF; font-weight: 600;">Phone:</span> +977 9825388189</li>
             <li><span style="color: #FFFFFF; font-weight: 600;">Email:</span> hello@seoulmandu.com</li>
             <li><a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
@@ -1206,30 +1522,38 @@
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              <input type="text" id="custName" class="checkout-input" placeholder="Your full name" autocomplete="name" required>
+              <input type="text" id="custName" class="checkout-input" placeholder="Your full name" autocomplete="name"
+                required>
             </div>
           </div>
 
           <!-- Customer Phone -->
           <div class="checkout-field-group">
-            <label for="custPhone" class="checkout-label">Contact / Mobile Number <span class="required">*</span></label>
+            <label for="custPhone" class="checkout-label">Contact / Mobile Number <span
+                class="required">*</span></label>
             <div class="checkout-input-wrap">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
               </svg>
-              <input type="tel" id="custPhone" class="checkout-input" placeholder="e.g. 9825388189" autocomplete="tel" required>
+              <input type="tel" id="custPhone" class="checkout-input" placeholder="e.g. 9825388189" autocomplete="tel"
+                required>
             </div>
           </div>
 
           <!-- Delivery Address -->
           <div class="checkout-field-group" id="addressFieldGroup">
-            <label for="custAddress" class="checkout-label" id="custAddressLabel">Delivery Address in Dharan <span class="required">*</span></label>
+            <label for="custAddress" class="checkout-label" id="custAddressLabel">Delivery Address in Dharan <span
+                class="required">*</span></label>
             <div class="checkout-input-wrap">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
-              <input type="text" id="custAddress" class="checkout-input" placeholder="Ward / Street / Landmark (e.g. Ward 8, Clock Tower area)" autocomplete="street-address" required>
+              <input type="text" id="custAddress" class="checkout-input"
+                placeholder="Ward / Street / Landmark (e.g. Ward 8, Clock Tower area)" autocomplete="street-address"
+                required>
             </div>
             <div class="checkout-tip" id="custAddressTip">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1243,12 +1567,14 @@
 
           <!-- Special Notes -->
           <div class="checkout-field-group">
-            <label for="custNotes" class="checkout-label">Order Instructions / Note <span class="optional">(Optional)</span></label>
+            <label for="custNotes" class="checkout-label">Order Instructions / Note <span
+                class="optional">(Optional)</span></label>
             <div class="checkout-input-wrap">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
               </svg>
-              <input type="text" id="custNotes" class="checkout-input" placeholder="e.g. Ring bell, extra spicy ramen, call upon arrival">
+              <input type="text" id="custNotes" class="checkout-input"
+                placeholder="e.g. Ring bell, extra spicy ramen, call upon arrival">
             </div>
           </div>
         </div>
@@ -1287,7 +1613,8 @@
           <span>Order via WhatsApp</span>
         </button>
         <p class="cart-privacy-notice">
-          By ordering, you acknowledge our <a href="privacypolicy.html" target="_blank" rel="noopener">Privacy Policy</a> &amp; <a href="termsofservice.html" target="_blank" rel="noopener">Terms of Service</a>.
+          By ordering, you acknowledge our <a href="privacypolicy.html" target="_blank" rel="noopener">Privacy
+            Policy</a> &amp; <a href="termsofservice.html" target="_blank" rel="noopener">Terms of Service</a>.
         </p>
       </div>
     </div>

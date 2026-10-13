@@ -7,7 +7,7 @@ window.SEOULMANDU_MENU = [
     id: "sm-kimchi",
     name: "Seoulmandu Authentic Kimchi (서울만두 김치)",
     subname: "Traditional Fermented Napa Cabbage (500g Jar)",
-    category: "rice",
+    category: "sauces",
     price: "Rs. 450",
     priceRaw: 450,
     badge: "SIGNATURE",
@@ -17,13 +17,17 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/seoulmandu_signature_kimchi.jpg",
     description: "Seoulmandu's flagship house recipe. Naturally fermented Napa cabbage infused with authentic Korean red pepper flakes (gochugaru), garlic, ginger, and scallions. Probiotic-packed, deeply savory, and perfectly tangy.",
-    tags: ["House Brand", "500g Jar", "Probiotic Rich", "Vegetarian"]
+    tags: ["House Brand", "500g Jar", "Probiotic Rich", "Vegetarian"],
+    variants: [
+      { id: "fresh", name: "Fresh & Crisp Ferment (갓 담근 맛)", desc: "Tangy, lively Napa cabbage with crisp texture & balanced spice", badge: "SIGNATURE" },
+      { id: "mature", name: "Deep Mature Ferment (묵은지 스타일)", desc: "Aged probiotics, deeper savoriness, ideal for Kimchi Jjigae & Fried Rice" }
+    ]
   },
   {
     id: "sm-01",
     name: "Bibigo Wang Mandu (비비고 왕만두)",
     subname: "Frozen Steamed & Pan-Fry Dumplings",
-    category: "mandu",
+    category: "frozen",
     price: "Rs. 680",
     priceRaw: 680,
     badge: "BESTSELLER",
@@ -33,13 +37,18 @@ window.SEOULMANDU_MENU = [
     isVegetarian: false,
     image: "assets/images/frozen_bibigo_dumplings.jpg",
     description: "Korea's #1 frozen dumpling pouch. Generously filled with juicy minced filling, tender garlic chives, tofu, and glass noodles in thin hand-folded wrappers. Ready to pan-fry, steam, or air-fry.",
-    tags: ["Frozen Pack", "Bibigo 900g", "Air Fryer Ready"]
+    tags: ["Frozen Pack", "Bibigo 900g", "Air Fryer Ready"],
+    variants: [
+      { id: "pan-fry", name: "Crispy Pan-Fry Style (군만두용)", desc: "Thin skin cooks to a golden lace crunch in 7 mins", badge: "POPULAR" },
+      { id: "steamed", name: "Steamed Bamboo Basket (찐만두용)", desc: "Tender, juicy hand-folded wrapper with rich succulent filling" },
+      { id: "air-fryer", name: "Air Fryer Quick Style (에어프라이어)", desc: "Crispy exterior with locked-in hot juicy juices in 8 mins" }
+    ]
   },
   {
     id: "sm-02",
     name: "CJ Potato Mozzarella Corn Dog (감자 핫도그)",
     subname: "Frozen Crispy Potato Cheese Skewers",
-    category: "street",
+    category: "snacks",
     price: "Rs. 720",
     priceRaw: 720,
     badge: "TRENDING",
@@ -49,13 +58,17 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/frozen_korean_corndogs.jpg",
     description: "Korea's viral street food in a retail freezer pack. Stretchy whole mozzarella cheese coated in golden diced potato cubes and sweet batter. Ready in 8 mins in an air fryer.",
-    tags: ["Frozen 4-Pack", "Cheese Pull", "Viral Street Snack"]
+    tags: ["Frozen 4-Pack", "Cheese Pull", "Viral Street Snack"],
+    variants: [
+      { id: "potato-mozz", name: "Diced Potato Mozzarella (감자 모짜)", desc: "Crunchy potato cube crust with whole stretchy mozzarella", badge: "TRENDING" },
+      { id: "classic-cheese", name: "Classic Batter Mozzarella (치즈 핫도그)", desc: "Sweet Korean street-style golden batter coating" }
+    ]
   },
   {
     id: "sm-03",
     name: "Yopokki Cheese Tteokbokki (요포키 치즈)",
     subname: "Instant Cheesy Korean Rice Cake Kit",
-    category: "street",
+    category: "snacks",
     price: "Rs. 380",
     priceRaw: 380,
     badge: "CUSTOMER FAVORITE",
@@ -65,13 +78,17 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/packaged_cheese_tteokbokki.jpg",
     description: "Korea's favorite packaged instant Tteokbokki. Chewy cylindrical rice cakes paired with rich savory cheddar-mozzarella seasoning powder. Cooks in 2 mins in microwave or stovetop.",
-    tags: ["Instant Pack", "Cheese Lovers", "Quick 2-Min"]
+    tags: ["Instant Pack", "Cheese Lovers", "Quick 2-Min"],
+    variants: [
+      { id: "cheddar-mozz", name: "Cheddar & Mozzarella Cheese (치즈맛)", desc: "Creamy, savory melted cheese powder blend", badge: "FAVORITE" },
+      { id: "sweet-spicy", name: "Sweet-Spicy Gochujang (오리지널 매콤)", desc: "Traditional Seoul street food red chili glaze" }
+    ]
   },
   {
     id: "sm-04",
     name: "Samyang Buldak & Shin Ramyun Pack (라면 묶음)",
     subname: "Viral Spicy Korean Ramen Assortment",
-    category: "street",
+    category: "ramen",
     price: "Rs. 320",
     priceRaw: 320,
     badge: "BESTSELLER",
@@ -81,13 +98,18 @@ window.SEOULMANDU_MENU = [
     isVegetarian: false,
     image: "assets/images/bestseller_ramen_collection.jpg",
     description: "The undisputed kings of Korean instant ramen. Imported 5-pack bundles of world-famous Samyang 2x Spicy Hot Chicken Buldak, Nongshim Shin Ramyun, and Ottogi Jin Ramen Spicy.",
-    tags: ["Instant Ramen", "Spicy Buldak", "Multipack"]
+    tags: ["Instant Ramen", "Spicy Buldak", "Multipack"],
+    variants: [
+      { id: "buldak-2x", name: "Samyang 2x Spicy Buldak (핵불닭볶음면)", desc: "World-famous legendary fiery chicken stir-fry ramen", badge: "HOT" },
+      { id: "shin-ramyun", name: "Nongshim Shin Ramyun (신라면)", desc: "Rich gourmet spicy beef broth with shiitake & scallions", badge: "BESTSELLER" },
+      { id: "jin-spicy", name: "Ottogi Jin Ramen Spicy (진라면)", desc: "Hearty umami broth with springy noodles" }
+    ]
   },
   {
     id: "sm-05",
     name: "Bibigo Mandu & Frozen Street Snack Pack (냉동 스낵)",
     subname: "Dumplings, Chicken & Corn Dog Assortment",
-    category: "mandu",
+    category: "frozen",
     price: "Rs. 850",
     priceRaw: 850,
     badge: "VALUE PACK",
@@ -97,13 +119,16 @@ window.SEOULMANDU_MENU = [
     isVegetarian: false,
     image: "assets/images/bestseller_frozen_foods.jpg",
     description: "The ultimate Korean freezer collection: Bibigo Wang Kyoza mandu, Korean sweet-spicy chicken bites, crispy seafood pancake (Haemul Pajeon), and golden corn dogs ready at home.",
-    tags: ["Frozen Variety", "Family Pack", "Air Fryer Ready"]
+    tags: ["Frozen Variety", "Family Pack", "Air Fryer Ready"],
+    variants: [
+      { id: "variety-combo", name: "Assorted Family Bundle (모둠 세트)", desc: "Bibigo dumplings, chicken bites & corn dogs combination", badge: "VALUE" }
+    ]
   },
   {
     id: "sm-06",
     name: "Gwangcheon Premium Roasted Seaweed (광천김)",
     subname: "Crispy Roasted Laver Sheets & Rice Flakes",
-    category: "rice",
+    category: "snacks",
     price: "Rs. 240",
     priceRaw: 240,
     badge: "PANTRY STAPLE",
@@ -113,7 +138,11 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/bestseller_roasted_seaweed.jpg",
     description: "Crispy roasted Korean seaweed seasoned with pure toasted sesame oil and fine sea salt. Includes individual snack sheets and seasoned Zaban flakes for topping rice bowls and noodles.",
-    tags: ["Roasted Laver", "Sesame Oil", "Healthy Snack"]
+    tags: ["Roasted Laver", "Sesame Oil", "Healthy Snack"],
+    variants: [
+      { id: "snack-sheets", name: "Roasted Snack Laver Sheets (조미김 도시락)", desc: "Toasted sesame oil & mineral sea salt individual snack packs", badge: "CRISPY" },
+      { id: "rice-flakes", name: "Seasoned Seaweed Flakes (자반김)", desc: "Sweet-savory crunchy flakes for warm rice bowls & bibimbap" }
+    ]
   },
   {
     id: "sm-07",
@@ -129,13 +158,18 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/bestseller_korean_drinks.jpg",
     description: "Directly imported Korean bottles. Smooth distilled Chamisul Fresh, iconic Jinro Original, Chum-Churum, and sweet fruit-infused Good Day Peach Soju for Korean dining pairing.",
-    tags: ["Imported Soju", "Chilled", "360ml Bottle"]
+    tags: ["Imported Soju", "Chilled", "360ml Bottle"],
+    variants: [
+      { id: "chamisul", name: "Chamisul Fresh Soju (참이슬 후레쉬 360ml)", desc: "Clean bamboo charcoal filtered Korean distilled spirit (16.9% ABV)", badge: "BESTSELLER" },
+      { id: "jinro", name: "Jinro Is Back (진로 이즈백 360ml)", desc: "Classic nostalgic clear bottle, extra smooth taste" },
+      { id: "peach", name: "Good Day Peach Fruit Soju (좋은데이 복숭아)", desc: "Sweet fragrant natural Korean peach infusion", badge: "SWEET" }
+    ]
   },
   {
     id: "sm-08",
     name: "Market O Real Brownie & Sweet Snacks (리얼 브라우니)",
     subname: "Imported Korean Confectionery & Treats",
-    category: "drinks",
+    category: "sweets",
     price: "Rs. 420",
     priceRaw: 420,
     badge: "SWEET BITE",
@@ -145,13 +179,17 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/korean_unpacked_flatlay.jpg",
     description: "Korea's most coveted confectionery. Dense, fudgy brownies crafted with real chocolate chunks, packaged alongside Maxim Mocha Gold instant coffee sticks and sweet butter biscuits.",
-    tags: ["Sweet Treats", "Market O", "Dessert Snack"]
+    tags: ["Sweet Treats", "Market O", "Dessert Snack"],
+    variants: [
+      { id: "real-brownie", name: "Market O Real Brownie 4-Pack (리얼 브라우니)", desc: "Dense fudgy brownie with real chocolate chunks", badge: "SWEET" },
+      { id: "maxim-coffee", name: "Maxim Mocha Gold Coffee Mix (맥심 모카골드)", desc: "Beloved Korean convenience instant coffee sticks" }
+    ]
   },
   {
     id: "sm-09",
     name: "HBAF Honey Butter Almonds & Chips (허니버터아몬드)",
     subname: "Viral Butter Honey Nut Pouch & Snack Shelves",
-    category: "rice",
+    category: "snacks",
     price: "Rs. 490",
     priceRaw: 490,
     badge: "TRENDING",
@@ -161,13 +199,17 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/all_things_korean_shelves.jpg",
     description: "The viral Korean snack craze. Premium roasted almonds coated in rich sweet cream butter and wild honey. Stocked alongside Orion turtle chips, sweet corn chips, and snack pouches.",
-    tags: ["Viral Almonds", "HBAF 210g", "Snack Craze"]
+    tags: ["Viral Almonds", "HBAF 210g", "Snack Craze"],
+    variants: [
+      { id: "honey-butter", name: "HBAF Honey Butter Almond (허니버터아몬드 210g)", desc: "Sweet cream butter & wild acacia honey glaze", badge: "VIRAL" },
+      { id: "turtle-chips", name: "Orion Turtle Chips Corn Soup (꼬북칩)", desc: "4-layer crispy corn soup crunchy chips" }
+    ]
   },
   {
     id: "sm-10",
     name: "Korean Mart Pantry Starter Kit (한국 식료품 세트)",
     subname: "Gochujang, Pastes & Everyday Essentials",
-    category: "rice",
+    category: "sauces",
     price: "Rs. 950",
     priceRaw: 950,
     badge: "MUST HAVE",
@@ -177,13 +219,16 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/korean_cravings_tote.jpg",
     description: "A curated starter tote with all Korean cooking essentials: Sunchang Gochujang red chili paste, Doenjang soybean paste, toasted sesame oil, glass noodles, and dipping sauce.",
-    tags: ["Cooking Staples", "Gochujang", "Pantry Kit"]
+    tags: ["Cooking Staples", "Gochujang", "Pantry Kit"],
+    variants: [
+      { id: "cooking-kit", name: "Essential Pantry Starter Bundle (식료품 세트)", desc: "Gochujang paste, Doenjang, sesame oil & noodles", badge: "STARTER" }
+    ]
   },
   {
     id: "sm-11",
     name: "Korean Instant Cup & Bowl Ramyun Wall (컵라면)",
     subname: "Grab-and-Go Hot Cup Noodles & Bowls",
-    category: "street",
+    category: "ramen",
     price: "Rs. 220",
     priceRaw: 220,
     badge: "QUICK BITE",
@@ -193,7 +238,12 @@ window.SEOULMANDU_MENU = [
     isVegetarian: false,
     image: "assets/images/discover_korea_ramen_wall.jpg",
     description: "Instant comfort on the go. An extensive wall of authentic imported cup ramen including Yukgaejang hot bowl, Buldak Carbonara cup, Shin Ramyun Big Bowl, and Neoguri udon.",
-    tags: ["Cup Noodles", "Ready in 3 Mins", "Comfort"]
+    tags: ["Cup Noodles", "Ready in 3 Mins", "Comfort"],
+    variants: [
+      { id: "buldak-carbonara", name: "Buldak Carbonara Cup (까르보 불닭 컵)", desc: "Creamy cheese and spicy hot chicken", badge: "POPULAR" },
+      { id: "shin-bowl", name: "Shin Ramyun Big Bowl (신라면 큰사발)", desc: "Korea's #1 beef & vegetable cup noodle" },
+      { id: "yukgaejang", name: "Yukgaejang Spicy Beef Cup (육개장 사발면)", desc: "Nostalgic thin curly noodles with savory broth" }
+    ]
   },
   {
     id: "sm-12",
@@ -209,7 +259,107 @@ window.SEOULMANDU_MENU = [
     isVegetarian: true,
     image: "assets/images/seoul_to_dharan_aisle.jpg",
     description: "Classic canned Korean convenience drinks: fizzy Milkis yogurt soda, Haitai Bong Bong white grape juice with real grape pulp, Sac Sac mandarin orange, and iced pouch teas.",
-    tags: ["Chilled Cans", "Milkis", "Real Fruit Pulp"]
+    tags: ["Chilled Cans", "Milkis", "Real Fruit Pulp"],
+    variants: [
+      { id: "milkis", name: "Milkis Yogurt Carbonated Soda (밀키스 240ml)", desc: "Creamy, fizzy Korean soda favorite", badge: "FAVORITE" },
+      { id: "bong-bong", name: "Haitai Bong Bong White Grape (봉봉 240ml)", desc: "Real whole peeled grape pulp inside" },
+      { id: "sac-sac", name: "Haitai Sac Sac Orange (쌕쌕 오렌지 240ml)", desc: "Tangy citrus juice with real mandarin pulp" }
+    ]
+  },
+  {
+    id: "sm-13",
+    name: "Lotte Pepero Assorted Collection (롯데 빼빼로)",
+    subname: "Original, Almond, Choco Cookie & White Cookie Sticks",
+    category: "sweets",
+    price: "Rs. 220",
+    priceRaw: 220,
+    badge: "POPULAR",
+    spice: 0,
+    calories: "250 kcal",
+    pieces: "32g–47g Box",
+    isVegetarian: true,
+    image: "assets/images/lotte_pepero_collection.jpg",
+    description: "Korea's iconic chocolate-dipped biscuit sticks. Available in crispy Almond, Cookies & Cream White Cookie, rich Choco Cookie, crunchy Crunky, and classic Milk Chocolate Original.",
+    tags: ["Lotte", "Pepero", "Sweet Biscuit", "Imported Snack"],
+    variants: [
+      { id: "almond", name: "Almond Pepero (아몬드 빼빼로)", desc: "Crisp roasted almond pieces dipped in rich milk chocolate", badge: "POPULAR" },
+      { id: "white-cookie", name: "White Cookie (화이트쿠키 빼빼로)", desc: "Cookies & cream white chocolate with dark cookie crumbles", badge: "BESTSELLER" },
+      { id: "choco-cookie", name: "Choco Cookie (초코쿠키 빼빼로)", desc: "Dark chocolate cookie bits over luscious milk chocolate" },
+      { id: "crunky", name: "Crunky Crunch (크런키 빼빼로)", desc: "Crispy malt puffs encased in sweet Korean chocolate" },
+      { id: "original", name: "Original Milk Chocolate (오리지널 빼빼로)", desc: "Classic iconic red box milk chocolate biscuit sticks" }
+    ]
+  }
+];
+
+/**
+ * Seoulmandu Special Offers & Promotional Deals
+ * IMPORTANT: ONLY promotional offers, discounted mart items, and bundle deals
+ * can be added here. Every item MUST provide offerPrice, originalPrice, discountLabel, and offer badge.
+ */
+window.SEOULMANDU_OFFERS = [
+  {
+    id: "offer-01",
+    dishId: "sm-04",
+    category: "🍜 Instant Noodles & Ramen",
+    badge: "22% OFF • LIMITED DEAL",
+    badgeType: "red",
+    title: "Samyang Buldak & Shin Ramyun Pack",
+    desc: "Special Mart Offer: Korea's champion instant ramyun pack bundled at an exclusive discount. 5-pack bundle featuring spicy Buldak and savory gourmet Shin Ramyun.",
+    chips: ["🔥 Save Rs. 70 Today", "📦 5-Pack Multipack", "⚡ Ready in 3 mins"],
+    offerPrice: 250,
+    originalPrice: 320,
+    discountLabel: "SAVE 22%",
+    image: "assets/images/bestseller_ramen_collection.jpg",
+    stockBadge: "🔥 22% OFF DEAL",
+    tabLabel: "22% OFF Buldak"
+  },
+  {
+    id: "offer-02",
+    dishId: "sm-kimchi",
+    category: "🥫 Sauces & Condiments",
+    badge: "SAVE RS. 70 • HOUSE SPECIAL",
+    badgeType: "gold",
+    title: "Seoulmandu Authentic Kimchi (500g)",
+    desc: "Promotional Mart Offer: Naturally fermented Napa cabbage infused with authentic Korean gochugaru, garlic, and ginger. Probiotic-rich house signature at special discount.",
+    chips: ["🫙 500g Glass Jar", "🌱 Handcrafted Fresh", "🏷️ Save Rs. 70 Today"],
+    offerPrice: 380,
+    originalPrice: 450,
+    discountLabel: "SAVE 16%",
+    image: "assets/images/seoulmandu_signature_kimchi.jpg",
+    stockBadge: "🏷️ SAVE RS. 70",
+    tabLabel: "Kimchi Deal"
+  },
+  {
+    id: "offer-03",
+    dishId: "sm-01",
+    category: "🥟 Frozen Foods & Dumplings",
+    badge: "19% OFF • FAMILY DEAL",
+    badgeType: "red",
+    title: "Bibigo Wang Mandu (900g Family Pack)",
+    desc: "Special Mart Offer: Korea's #1 frozen dumplings packed with juicy meat, garlic chives, and glass noodles. Pan-fry or steam to perfection at limited promotional value.",
+    chips: ["🥟 900g Family Pack", "🍳 Crispy Pan-Fry / Steamed", "🏷️ Save Rs. 130"],
+    offerPrice: 550,
+    originalPrice: 680,
+    discountLabel: "SAVE 19%",
+    image: "assets/images/frozen_bibigo_dumplings.jpg",
+    stockBadge: "⚡ SAVE RS. 130",
+    tabLabel: "19% OFF Mandu"
+  },
+  {
+    id: "offer-04",
+    dishId: "sm-07",
+    category: "🥤 Drinks & Beverages",
+    badge: "COMBO OFFER • SAVE RS. 70",
+    badgeType: "gold",
+    title: "Authentic Korean Soju Collection",
+    desc: "Special Drinks Bundle: Directly imported Korean bottles: smooth bamboo-filtered Chamisul Fresh (16.9% ABV), Jinro Original, and sweet Good Day Peach Soju on promotional discount.",
+    chips: ["🍶 Chamisul & Jinro Original", "🍑 Peach Fruit Soju", "🏷️ Save Rs. 70 Bundle"],
+    offerPrice: 450,
+    originalPrice: 520,
+    discountLabel: "SAVE 13%",
+    image: "assets/images/bestseller_korean_drinks.jpg",
+    stockBadge: "🎁 COMBO OFFER",
+    tabLabel: "Soju Offer"
   }
 ];
 

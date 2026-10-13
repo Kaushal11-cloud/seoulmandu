@@ -45,23 +45,21 @@
        ========================================================================= -->
   <header class="site-header" id="siteHeader">
     <div class="container container-wide navbar-container">
-      <!-- Brand Logo -->
+      <!-- Brand Logo (Clear, Crisp & Premium) -->
       <a href="index.html" class="brand-logo" aria-label="Seoulmandu Korean Mart Home">
         <img src="assets/images/seoulmandu_logo.jpg" alt="Seoulmandu Korean Mart Logo" class="brand-logo-img">
         <div class="brand-text">
-          <span class="brand-title" aria-label="Seoulmandu">Seou<span class="brand-tower-l" aria-hidden="true"><svg
-                viewBox="0 0 32 96">
-                <path
-                  d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
+          <span class="brand-title" aria-label="Seoulmandu">Seou<span class="brand-tower-l" aria-hidden="true"><svg viewBox="0 0 32 96">
+                <path d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
               </svg></span>mandu</span>
-          <span class="brand-sub">KOREAN MART DRN</span>
+          <span class="brand-sub">KOREAN MART</span>
         </div>
       </a>
 
       <!-- Desktop Navigation Links -->
       <nav class="nav-links" aria-label="Legal Page Navigation">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="index.html#menu" class="nav-link">Mart Items</a>
+        <a href="index.html#menu" class="nav-link">Products</a>
         <a href="index.html#about" class="nav-link">Our Story</a>
         <a href="index.html#location" class="nav-link">Contact</a>
       </nav>
@@ -77,60 +75,82 @@
           <span>Back to Store</span>
         </a>
 
-        <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <!-- Mobile Menu Toggle Button (react-burger-menu) -->
+        <div class="bm-burger-button mobile-menu-btn" id="mobileMenuBtn">
+          <button type="button" id="react-burger-menu-btn" aria-label="Open Menu">Open Menu</button>
+          <span>
+            <span class="bm-burger-bars"></span>
+            <span class="bm-burger-bars"></span>
+            <span class="bm-burger-bars"></span>
+          </span>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer -->
-  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
-    <div class="mobile-drawer-header">
-      <img src="assets/images/seoulmandu_logo.jpg" alt="Seoulmandu Korean Mart" class="mobile-drawer-logo">
-      <div>
-        <div class="mobile-drawer-brand" aria-label="Seoulmandu">Seou<span class="brand-tower-l" aria-hidden="true"><svg
-              viewBox="0 0 32 96">
-              <path
-                d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
-            </svg></span>mandu</div>
-        <div class="mobile-drawer-sub">KOREAN MART DRN</div>
-      </div>
-    </div>
-    <div class="mobile-nav-links">
-      <a href="index.html" class="mobile-nav-link">
-        <span>Store Home</span>
-      </a>
-      <a href="index.html#menu" class="mobile-nav-link">
-        <span>Korean Mart Items</span>
-      </a>
-      <a href="index.html#about" class="mobile-nav-link">
-        <span>Our Story</span>
-      </a>
-      <a href="termsofservice.html" class="mobile-nav-link">
-        <span>Terms of Service</span>
-      </a>
-      <a href="index.html#location" class="mobile-nav-link">
-        <span>Store Location & Hours</span>
-      </a>
+  <!-- Mobile Navigation Drawer (react-burger-menu) -->
+  <aside class="bm-menu-wrap mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation" aria-hidden="true">
+    <!-- Close Cross Button (react-burger-menu) -->
+    <div class="bm-cross-button" id="bmCrossBtn">
+      <button type="button" id="react-burger-cross-btn" aria-label="Close Menu">Close Menu</button>
+      <span>
+        <span class="bm-cross"></span>
+        <span class="bm-cross"></span>
+      </span>
     </div>
 
-    <div class="mobile-drawer-bottom">
-      <a href="index.html" class="btn btn-primary" style="text-align: center; justify-content: center;">
-        <span>Return to Shopping</span>
-      </a>
-      <div style="font-size: 0.78rem; color: var(--color-text-gray-muted); text-align: center; display: flex; flex-direction: column; gap: 4px;">
-        <div>Instagram: <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
-            style="color: var(--color-primary); font-weight: 700;">@seoulmandu.store</a></div>
-        <div>TikTok: <a href="https://www.tiktok.com/@seoulmandu" target="_blank" rel="noopener noreferrer"
-            style="color: #25F4EE; font-weight: 700;">@seoulmandu</a></div>
+    <div class="bm-menu">
+      <div class="mobile-drawer-header">
+        <img src="assets/images/seoulmandu_logo.jpg" alt="Seoulmandu Korean Mart" class="mobile-drawer-logo">
+        <div class="mobile-drawer-brand-wrap">
+          <div class="mobile-drawer-brand">Seoulmandu</div>
+          <div class="mobile-drawer-sub">서울만두 • Korean Mart in Dharan</div>
+        </div>
+      </div>
+
+      <!-- Mobile Drawer Search Field -->
+      <form action="index.html#menu" method="GET" class="mobile-drawer-search-wrap" role="search">
+        <svg class="mobile-drawer-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" name="search" class="mobile-drawer-search-input"
+          placeholder="Search noodles, snacks, drinks..." aria-label="Search products">
+      </form>
+
+      <nav class="bm-item-list mobile-nav-links" aria-label="Mobile Navigation">
+        <a href="index.html" class="bm-item mobile-nav-link">
+          <span>Store Home</span>
+        </a>
+        <a href="index.html#menu" class="bm-item mobile-nav-link">
+          <span>Products</span>
+        </a>
+        <a href="index.html#about" class="bm-item mobile-nav-link">
+          <span>Our Story</span>
+        </a>
+        <a href="termsofservice.html" class="bm-item mobile-nav-link">
+          <span>Terms of Service</span>
+        </a>
+        <a href="index.html#location" class="bm-item mobile-nav-link">
+          <span>Store Location & Hours</span>
+        </a>
+      </nav>
+
+      <div class="mobile-drawer-bottom">
+        <a href="index.html" class="btn btn-primary" style="text-align: center; justify-content: center;">
+          <span>Return to Shopping</span>
+        </a>
+        <div style="font-size: 0.78rem; color: var(--color-text-gray-muted); text-align: center; display: flex; flex-direction: column; gap: 4px;">
+          <div>Instagram: <a href="https://www.instagram.com/seoulmandu.store" target="_blank" rel="noopener noreferrer"
+              style="color: var(--color-primary); font-weight: 700;">@seoulmandu.store</a></div>
+          <div>TikTok: <a href="https://www.tiktok.com/@seoulmandu" target="_blank" rel="noopener noreferrer"
+              style="color: #25F4EE; font-weight: 700;">@seoulmandu</a></div>
+        </div>
       </div>
     </div>
   </aside>
-  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <div class="bm-overlay mobile-overlay" id="mobileOverlay"></div>
 
   <!-- =========================================================================
        2. MAIN CONTENT AREA
@@ -545,7 +565,7 @@
                     <path
                       d="M 15.2 0 H 16.8 V 22 H 17.8 V 32 H 20.8 V 35 L 26.5 43 V 51 L 22.5 55 H 18.8 V 94 H 13.2 V 55 H 9.5 L 5.5 51 V 43 L 11.2 35 V 32 H 14.2 V 22 H 15.2 Z" />
                   </svg></span>mandu</span>
-              <span class="brand-sub">KOREAN MART DRN</span>
+              <span class="brand-sub">KOREAN MART</span>
             </div>
           </a>
           <p class="footer-brand-bio">
@@ -574,7 +594,7 @@
           <h4 class="footer-col-title">Navigation</h4>
           <ul class="footer-nav-list">
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#menu">Korean Mart Items</a></li>
+            <li><a href="index.html#menu">Products</a></li>
             <li><a href="index.html#featured">Bestsellers</a></li>
             <li><a href="index.html#about">Our Story</a></li>
             <li><a href="index.html#location">Store Location</a></li>
@@ -653,6 +673,9 @@
         }
       }
 
+      const bmCrossBtn = document.querySelector('#bmCrossBtn') || document.querySelector('#react-burger-cross-btn');
+
+      bmCrossBtn?.addEventListener('click', () => toggleMobileMenu(false));
       mobileMenuBtn?.addEventListener('click', () => {
         const isOpen = mobileNavDrawer?.classList.contains('open');
         toggleMobileMenu(!isOpen);
