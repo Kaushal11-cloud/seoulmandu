@@ -1485,9 +1485,11 @@ document.addEventListener('DOMContentLoaded', () => {
       startAutoplay();
     });
 
-    // Touch Swipe Support (Precise horizontal detection)
+    // Touch & Mouse Drag Swipe Support (Precise horizontal detection)
     let touchStartX = 0;
     let touchStartY = 0;
+    let isMouseDown = false;
+
     heroCarousel.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
@@ -1507,6 +1509,29 @@ document.addEventListener('DOMContentLoaded', () => {
         startAutoplay();
       }
     }, { passive: true });
+
+    // Desktop Mouse Drag to Swipe between offers
+    heroCarousel.addEventListener('mousedown', (e) => {
+      if (e.target.closest('button, a, input')) return;
+      isMouseDown = true;
+      touchStartX = e.clientX;
+      touchStartY = e.clientY;
+    });
+
+    heroCarousel.addEventListener('mouseup', (e) => {
+      if (!isMouseDown) return;
+      isMouseDown = false;
+      const diffX = e.clientX - touchStartX;
+      const diffY = e.clientY - touchStartY;
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          goToSlide(currentSlide + 1);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+        startAutoplay();
+      }
+    });
 
     // Keyboard Arrow Navigation
     heroCarousel.addEventListener('keydown', (e) => {

@@ -1226,7 +1226,7 @@ ol {
   pointer-events: none;
   transform: scale(0.985) translateX(20px);
   transition: opacity 0.32s cubic-bezier(0.25, 1, 0.5, 1), transform 0.32s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.32s;
-  padding: 36px 54px;
+  padding: 36px 36px;
   display: flex;
   align-items: center;
   z-index: 1;
